@@ -108,3 +108,30 @@ function Bow({ opening }: { opening: boolean }) {
       style={{ originX: 0.5, originY: 0 }}
       initial={false}
       animate={opening ? { y: 90, x: dir * 34, rotate: dir * 18, opacity: 0 } : { y: 0, x: 0, rotate: 0, opacity: 1 }}
+      transition={{ ...t, delay: 0.05 }}
+    >
+      <path d={d} fill="url(#fl-satin-tail)" />
+    </motion.g>
+  );
+  return (
+    <svg
+      viewBox="-150 -100 300 270"
+      className="absolute left-0 top-0 w-[250px] sm:w-[310px]"
+      style={{ transform: "translate(-50%, -37.037%)", filter: "drop-shadow(0 10px 12px rgba(16,0,26,0.55))" }}
+      aria-hidden="true"
+    >
+      {tail(-1, "M-8 8C-20 40-38 92-62 150L-44 140-36 160C-16 104-2 52 6 10Z")}
+      {tail(1, "M8 8C22 44 42 96 60 154L44 144 32 162C16 108 4 54-6 10Z")}
+      {loop(-1)}
+      {loop(1)}
+      <motion.g initial={false} animate={{ opacity: opening ? 0 : 1, scale: opening ? 0.6 : 1 }} transition={{ ...t, delay: 0.2 }}>
+        <path d="M-18-16C-8-22 8-22 18-16C23-6 23 8 18 16C8 22-8 22-18 16C-23 8-23-6-18-16Z" fill="url(#fl-satin)" />
+        <path d="M-9-15C-3-5-3 7-9 17M9-15C3-5 3 7 9 17" stroke="#6e1206" strokeOpacity={0.45} strokeWidth={1.4} fill="none" />
+      </motion.g>
+    </svg>
+  );
+}
+
+export function RoyalGate({
+  guest,
+  onStart,
