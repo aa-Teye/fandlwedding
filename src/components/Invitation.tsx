@@ -46,3 +46,27 @@ export function Invitation() {
             </div>
             <p className="mx-auto mt-4 max-w-xs font-display text-[0.7rem] font-semibold leading-relaxed tracking-[0.25em] text-purple/85 sm:max-w-sm sm:text-xs">
               {invitation.line2.toUpperCase()}
+            </p>
+            <h2 className="mt-5 font-script text-[2.7rem] leading-[1.1] text-purple sm:text-6xl">
+              {couple.groomFull.first}
+              <br />
+              {couple.groomFull.last}
+            </h2>
+            <Arrowed>AND</Arrowed>
+            <h2 className="font-script text-[2.7rem] leading-[1.1] text-[#5a1440] sm:text-6xl">
+              {couple.brideFull.first}
+              <br />
+              {couple.brideFull.last}
+            </h2>
+            <Flourish className="mx-auto mt-6 w-52" />
+          </div>
+        </Reveal>
+
+        {cards.length > 0 && (
+          <div className="mt-14">
+            <p className="eyebrow text-center">Keep a copy</p>
+            <div className="-mx-5 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0">
+              {cards.map((c, i) => (
+                <Reveal key={c.label} delay={i * 0.1} className="w-[78%] shrink-0 snap-center sm:w-auto">
+                  <Image
+                    src={c.src}
