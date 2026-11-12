@@ -125,3 +125,28 @@ export function Sparkles({ count = 18, seed = 7, className = "" }: { count?: num
     y: (r() * 100).toFixed(2),
     s: Math.round(6 + r() * 12),
     d: (r() * 5).toFixed(2),
+    t: (2.6 + r() * 3).toFixed(2),
+  }));
+  return (
+    <div aria-hidden="true" className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+      {items.map((it, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 20 20"
+          className="sparkle absolute"
+          style={{
+            left: `${it.x}%`,
+            top: `${it.y}%`,
+            width: it.s,
+            height: it.s,
+            animationDelay: `${it.d}s`,
+            animationDuration: `${it.t}s`,
+            opacity: 0,
+          }}
+        >
+          <path d="M10 0C10.8 6 14 9.2 20 10 14 10.8 10.8 14 10 20 9.2 14 6 10.8 0 10 6 9.2 9.2 6 10 0Z" fill="#f7e2a6" />
+        </svg>
+      ))}
+    </div>
+  );
+}
