@@ -18,6 +18,7 @@ export function Rsvp({ guest }: { guest?: string | null }) {
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (guest) setName((n) => n || guest);
@@ -25,11 +26,7 @@ export function Rsvp({ guest }: { guest?: string | null }) {
 
   const to = rsvp.contacts[0];
 
-  const send = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) return setError("Please tell us your name.");
-    if (!attending) return setError("Please let us know if you can come.");
-    setError("");
+  const whatsappUrl = () => {
     const lines = [
       `RSVP: ${couple.groom} & ${couple.bride}'s wedding, ${wedding.shortDate}`,
       "",
@@ -38,8 +35,30 @@ export function Rsvp({ guest }: { guest?: string | null }) {
       ...(attending === "yes" ? [`Number of guests: ${guests}`] : []),
       ...(message.trim() ? ["", `Message: ${message.trim()}`] : []),
     ];
-    window.open(`https://wa.me/${intl(to.phone)}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
-    setSent(true);
+    return `https://wa.me/${intl(to.phone)}?text=${encodeURIComponent(lines.join("\n"))}`;
+  };
+
+  const send = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+    if (!name.trim()) return setError("Please tell us your name.");
+    if (!attending) return setError("Please let us know if you can come.");
+    setError("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, attending: attending === "yes", guests, message, invitedAs: guest ?? "" }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "We couldn't save your reply. Please try again.");
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "We couldn't save your reply. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -109,11 +128,8 @@ export function Rsvp({ guest }: { guest?: string | null }) {
 
               {error && <p className="font-serif text-lg text-rose">{error}</p>}
 
-              <button type="submit" className="btn btn-primary w-full !py-4">
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-                  <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662a11.88 11.88 0 005.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0012.05 0z" />
-                </svg>
-                Send my reply on WhatsApp
+              <button type="submit" disabled={sending} className="btn btn-primary w-full !py-4 disabled:opacity-60">
+                {sending ? "Sending…" : "Send my reply"}
               </button>
             </motion.form>
           ) : (
@@ -124,8 +140,12 @@ export function Rsvp({ guest }: { guest?: string | null }) {
               </motion.svg>
               <p className="mt-4 font-script text-5xl text-purple">Thank you!</p>
               <p className="mx-auto mt-3 max-w-xs font-serif text-lg text-muted">
-                Your reply is ready in WhatsApp. Just press send. If it didn&rsquo;t open, you can call us below.
+                {attending === "yes" ? "Your reply has been received. We can't wait to celebrate with you!" : "Your reply has been received. We'll miss you on the day."}
               </p>
+              <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="btn btn-outline mt-5">
+                Also tell us on WhatsApp
+              </a>
+              <br />
               <button onClick={() => setSent(false)} className="mt-5 text-sm text-purple underline decoration-gold/60 underline-offset-4">
                 Change my reply
               </button>
