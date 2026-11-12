@@ -73,3 +73,27 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
       {effects.sparkles && <Sparkles count={30} seed={11} />}
 
       <motion.div className="pointer-events-none absolute inset-0" style={{ y: floatUp }}>
+        <motion.div className="absolute left-0 top-0 origin-top-left" {...bloom(0.2)}>
+          <Corner pos="tl" className="!relative w-44 sm:w-80" />
+        </motion.div>
+        <motion.div className="absolute right-0 top-0 origin-top-right" {...bloom(0.35)}>
+          <Corner pos="tr" className="!relative w-28 sm:w-52" variant={1} />
+        </motion.div>
+      </motion.div>
+      <motion.div className="pointer-events-none absolute inset-0" style={{ y: sink }}>
+        <motion.div className="absolute bottom-0 right-0 origin-bottom-right" {...bloom(0.3)}>
+          <Corner pos="br" className="!relative w-44 sm:w-80" variant={1} />
+        </motion.div>
+        <motion.div className="absolute bottom-0 left-0 origin-bottom-left" {...bloom(0.45)}>
+          <Corner pos="bl" className="!relative w-28 sm:w-52" />
+        </motion.div>
+      </motion.div>
+
+      <motion.div className="relative z-10 flex w-full max-w-xl flex-col items-center" style={{ opacity: fadeOut }}>
+        {guest && (
+          <motion.p className="gold-foil mb-3 px-4 font-script text-4xl sm:text-5xl" {...fade(0.1)}>
+            Dear <Amp text={guest} className="font-serif text-[0.8em] italic" />,
+          </motion.p>
+        )}
+        <motion.p className="font-display text-[0.7rem] uppercase tracking-[0.32em] text-gold-soft sm:text-xs" {...fade(0.2)}>
+          {invitation.tagline}
