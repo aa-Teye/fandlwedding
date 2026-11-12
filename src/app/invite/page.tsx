@@ -73,3 +73,28 @@ export default function InvitePage() {
       <div className="mx-auto max-w-2xl">
         <p className="eyebrow text-center">For the couple</p>
         <h1 className="mt-2 text-center font-display text-3xl text-purple sm:text-4xl">Personal Invitations</h1>
+        <p className="mx-auto mt-3 max-w-lg text-balance text-center text-muted">
+          Type one guest (or couple) per line. Each gets their own personalized link where the envelope greets them by name.
+        </p>
+        <textarea
+          value={names}
+          onChange={(e) => setNames(e.target.value)}
+          rows={6}
+          placeholder={"Ama\nKofi & Efua Mensah\nAuntie Akos"}
+          className="mt-8 w-full rounded-xl border border-gold/40 bg-white/80 px-4 py-3 outline-none transition focus:border-purple focus:ring-2 focus:ring-purple/15"
+        />
+        {rows.length > 0 && <p className="mt-6 text-sm text-muted">{rows.length} invitation{rows.length > 1 ? "s" : ""} ready</p>}
+        <ul className="mt-3 space-y-4">
+          {rows.map((r, i) => (
+            <li key={`${i}-${r.name}`} className="rounded-2xl border border-gold/30 bg-white/80 p-5">
+              <p className="font-serif text-xl text-purple">{r.name}</p>
+              <p className="mt-1 break-all text-xs text-muted">{r.link}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(r.text)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn bg-[#25D366] py-2 text-white"
+                >
+                  Send on WhatsApp
+                </a>
