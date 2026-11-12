@@ -220,3 +220,31 @@ export function DressCode() {
             className="flex flex-col items-center gap-3"
             initial={{ opacity: 0, scale: 0.4, rotate: -30 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ type: "spring", stiffness: 140, damping: 12, delay: 0.15 + i * 0.15 }}
+          >
+            <span className="relative block h-20 w-20 sm:h-24 sm:w-24">
+              <span className="absolute -inset-1.5 rounded-full border border-gold/60" />
+              <span
+                className="absolute inset-0 overflow-hidden rounded-full shadow-[0_12px_24px_-10px_rgba(42,10,64,0.6)]"
+                style={{ background: `radial-gradient(circle at 32% 28%, rgba(255,255,255,0.55), transparent 42%), ${c.hex}` }}
+              >
+                <span className="absolute inset-0 animate-[foil_5s_linear_infinite] bg-[linear-gradient(110deg,transparent_30%,rgba(255,255,255,0.35)_45%,transparent_60%)] bg-[length:220%_100%] motion-reduce:animate-none" />
+              </span>
+            </span>
+            <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-purple">{c.name}</span>
+          </motion.div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function CopyRow({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="flex items-center justify-between gap-3 border-b border-gold/20 py-3 last:border-0">
+      <div>
+        <p className="text-[0.62rem] uppercase tracking-[0.2em] text-muted">{label}</p>
+        <p className="font-serif text-xl font-semibold text-purple">{value}</p>
+      </div>
