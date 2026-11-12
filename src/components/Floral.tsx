@@ -160,3 +160,30 @@ export function Leaf({ x, y, s = 1, r = 0, gold = false }: { x: number; y: numbe
         </>
       )}
     </g>
+  );
+}
+
+/** A curving gold stem with alternating gold leaves. */
+export function GoldSprig({ x, y, s = 1, r = 0 }: { x: number; y: number; s?: number; r?: number }) {
+  const leaves: [number, number, number][] = [
+    [18, -4, -40], [30, 2, 35], [46, -6, -35], [58, 0, 30], [74, -8, -30], [86, -4, 28], [100, -12, -20],
+  ];
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      <path d="M0 0C30 2 60-2 110-14" stroke="#b8892f" strokeWidth={1.4} fill="none" />
+      {leaves.map(([lx, ly, la], i) => (
+        <Leaf key={i} x={lx} y={ly} r={la} s={0.55 - i * 0.03} gold />
+      ))}
+    </g>
+  );
+}
+
+function Floret({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      {[0, 90, 180, 270].map((a) => (
+        <ellipse key={a} cx={0} cy={-5} rx={4.4} ry={5.6} transform={`rotate(${a + 45})`} fill="url(#fl-hyd)" stroke="#86ad57" strokeOpacity={0.6} strokeWidth={0.5} />
+      ))}
+      <circle r={1.3} fill="#6f9445" />
+    </g>
+  );
