@@ -135,3 +135,30 @@ function Bow({ opening }: { opening: boolean }) {
 export function RoyalGate({
   guest,
   onStart,
+  onOpen,
+}: {
+  guest?: string | null;
+  onStart?: () => void;
+  onOpen: () => void;
+}) {
+  const [opening, setOpening] = useState(false);
+  const [gone, setGone] = useState(false);
+  const [burst, setBurst] = useState(false);
+
+  const open = () => {
+    if (opening) return;
+    onStart?.(); // inside the tap, so phones allow the music to start
+    setOpening(true);
+    setTimeout(() => setBurst(true), (DOORS_AT + 0.1) * 1000);
+    setTimeout(() => {
+      setGone(true);
+      onOpen();
+    }, (DOORS_AT + DOORS_FOR - 0.1) * 1000);
+  };
+
+  return (
+    <>
+      <AnimatePresence>
+        {!gone && (
+          <motion.div
+            role="button"
