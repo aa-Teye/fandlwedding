@@ -48,3 +48,28 @@ export function Nav() {
                 <span className="gold-foil px-1 font-script text-3xl">{couple.groom[0]}</span>
                 <span className="gold-text font-serif text-lg italic">&amp;</span>
                 <span className="gold-foil px-1 font-script text-3xl">{couple.bride[0]}</span>
+              </a>
+              <div className="flex items-center gap-2">
+                <a href="#rsvp" onClick={() => setOpen(false)} className="btn btn-gold px-4 py-2">
+                  RSVP
+                </a>
+                <button
+                  onClick={() => setOpen(!open)}
+                  aria-expanded={open}
+                  aria-label={open ? "Close menu" : "Open menu"}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-gold-soft"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                    {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
