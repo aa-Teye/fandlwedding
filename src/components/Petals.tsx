@@ -125,3 +125,28 @@ function useCanvas(
         ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha * p.life));
         ctx.drawImage(sprites[p.gold ? sprites.length - 1 : p.sprite], -s / 2, -s / 2, s, s);
         return true;
+      });
+      ctx.globalAlpha = 1;
+      if (particles.length === 0) {
+        doneRef.current?.();
+        return;
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    const onVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else {
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    raf = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [opts.running]);
+
+  return ref;
