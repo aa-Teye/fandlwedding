@@ -105,3 +105,29 @@ export function Countdown() {
                   </div>
                 ))}
               </div>
+            </>
+          )}
+          {phase === "today" && (
+            <>
+              <p className="eyebrow !text-gold-soft">{wedding.shortDate}</p>
+              <h2 className="gold-foil mx-auto mt-2 w-fit px-4 pb-2 font-script text-6xl">Today&rsquo;s the day!</h2>
+              <p className="mt-3 font-serif text-xl italic text-gold-pale/85">
+                The ceremony begins at {wedding.displayTime}. Thank you for celebrating with us.
+              </p>
+            </>
+          )}
+          {phase === "after" && (
+            <>
+              <p className="eyebrow !text-gold-soft">{wedding.shortDate}</p>
+              <h2 className="gold-foil mx-auto mt-2 w-fit px-4 pb-2 font-script text-6xl">Just married</h2>
+              <p className="mt-3 font-serif text-xl italic text-gold-pale/85">Thank you for celebrating with us.</p>
+            </>
+          )}
+        </Reveal>
+        <p className="mt-8 font-display text-xs tracking-[0.25em] text-gold-soft/90">
+          {wedding.displayDate.toUpperCase()} · {wedding.displayTime.toUpperCase()}
+        </p>
+      </div>
+    </section>
+  );
+}
