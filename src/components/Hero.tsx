@@ -48,3 +48,28 @@ function Portrait() {
 export function Hero({ show, guest }: { show: boolean; guest?: string | null }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const floatUp = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const sink = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const fadeOut = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const fade = (d: number) => ({
+    initial: { opacity: 0, y: 26 },
+    animate: show ? { opacity: 1, y: 0 } : {},
+    transition: { delay: d, duration: 1.1, ease },
+  });
+  const bloom = (d: number) => ({
+    initial: { opacity: 0, scale: 0.6 },
+    animate: show ? { opacity: 1, scale: 1 } : {},
+    transition: { delay: d, duration: 1.4, ease },
+  });
+  const v = venues[0];
+
+  return (
+    <header
+      id="top"
+      ref={ref}
+      className="velvet relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-24 pt-20 text-center"
+    >
+      <GoldFrame dark className="inset-3 sm:inset-6" />
+      {effects.sparkles && <Sparkles count={30} seed={11} />}
+
+      <motion.div className="pointer-events-none absolute inset-0" style={{ y: floatUp }}>
