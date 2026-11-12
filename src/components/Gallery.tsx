@@ -23,3 +23,27 @@ export function Gallery() {
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+    };
+  }, [open, n]);
+
+  if (n === 0) return null;
+
+  return (
+    <Section id="gallery" eyebrow="Moments" title="Gallery" art="camera" className="champagne">
+      <div className="columns-2 gap-3 sm:columns-3">
+        {gallery.map((p, i) => (
+          <button key={p.src} onClick={() => setOpen(i)} className="mb-3 block w-full overflow-hidden rounded-xl ring-1 ring-gold/40">
+            <Image
+              src={p.src}
+              alt={p.alt}
+              width={p.width}
+              height={p.height}
+              sizes="(max-width: 640px) 50vw, 300px"
+              className="h-auto w-full transition duration-500 hover:scale-105"
+            />
+          </button>
+        ))}
+      </div>
+      <AnimatePresence>
+        {open !== null && (
+          <motion.div
