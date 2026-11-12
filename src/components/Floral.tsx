@@ -241,3 +241,30 @@ export function Lavender({ x, y, s = 1, r = 0 }: { x: number; y: number; s?: num
 
 /** A lush corner arrangement, drawn for the top-left corner (mirror it for the others). */
 export function RoseCluster({ variant = 0 }: { variant?: 0 | 1 }) {
+  const purpleFirst = variant === 0;
+  return (
+    <>
+      <GoldSprig x={92} y={30} r={-4} s={1.6} />
+      <GoldSprig x={30} y={92} r={84} s={1.6} />
+      <GoldSprig x={150} y={120} r={30} s={0.9} />
+      <Leaf x={120} y={36} r={-14} s={1.2} />
+      <Leaf x={36} y={122} r={104} s={1.2} />
+      <Leaf x={140} y={88} r={22} s={1.1} />
+      <Leaf x={92} y={140} r={70} s={1.1} />
+      <Leaf x={186} y={52} r={-30} s={0.9} />
+      <Leaf x={54} y={190} r={118} s={0.9} />
+      <Leaf x={70} y={100} r={45} s={1.1} />
+      <Lavender x={160} y={96} r={62} s={1.05} />
+      <Lavender x={98} y={160} r={28} s={1.05} />
+      <Lavender x={210} y={40} r={80} s={0.85} />
+      <BabysBreath x={196} y={92} r={50} s={1.1} />
+      <BabysBreath x={96} y={200} r={-140} s={1.1} />
+      <BabysBreath x={150} y={150} r={-45} s={1} />
+      <Hydrangea x={138} y={128} s={1.05} />
+      <Rose x={66} y={64} s={1.18} r={12} tone={purpleFirst ? "purple" : "red"} />
+      <Rose x={170} y={42} s={0.8} r={-20} tone={purpleFirst ? "red" : "purple"} />
+      <Rose x={40} y={172} s={0.86} r={40} tone="red" />
+      <Bud x={238} y={26} r={70} s={0.9} tone="red" />
+      <Bud x={24} y={244} r={160} s={0.9} tone={purpleFirst ? "purple" : "red"} />
+      <BabysBreath x={118} y={70} r={20} s={0.8} />
+      <BabysBreath x={70} y={118} r={-110} s={0.8} />
