@@ -387,3 +387,30 @@ export function Credit({ dark = true }: { dark?: boolean }) {
     </p>
   );
 }
+
+export function Footer() {
+  return (
+    <footer className="velvet relative overflow-hidden px-6 pb-12 pt-20 text-center">
+      <GoldFrame dark className="inset-3 sm:inset-5" />
+      {effects.sparkles && <Sparkles count={18} seed={57} />}
+      <Corner pos="tl" className="w-28 sm:w-44" />
+      <Corner pos="tr" className="w-28 sm:w-44" variant={1} />
+      <div className="relative z-10">
+        <p className="flex flex-col items-center sm:flex-row sm:justify-center sm:gap-4">
+          <span className="gold-foil px-3 pb-1 font-script text-6xl sm:text-7xl">{couple.groom}</span>
+          <span className="gold-text font-serif text-3xl italic">&amp;</span>
+          <span className="gold-foil px-3 pb-1 font-script text-6xl sm:text-7xl">{couple.bride}</span>
+        </p>
+        <p className="mt-3 font-display text-xs tracking-[0.3em] text-gold-soft">{wedding.displayDate.toUpperCase()}</p>
+        {couple.hashtag && <p className="mt-4 font-serif text-lg italic text-gold-soft">{couple.hashtag}</p>}
+        <Flourish className="mx-auto mt-6 w-48" />
+        <p className="mt-6 font-serif text-xl italic text-gold-pale/85">&ldquo;{scripture.text}&rdquo;</p>
+        <p className="mt-1 text-[0.7rem] uppercase tracking-[0.3em] text-gold-soft">{scripture.ref}</p>
+        <ShareButton />
+        <div className="mx-auto mt-14 max-w-xl border-t border-gold/20 pt-6">
+          <Credit />
+        </div>
+      </div>
+    </footer>
+  );
+}
