@@ -50,3 +50,29 @@ export function GoldFrame({ className = "inset-3 sm:inset-5", dark = false }: { 
     <div aria-hidden="true" className={`pointer-events-none absolute ${className}`}>
       <div className={`absolute inset-0 border ${line}`} />
       <div className={`absolute inset-[5px] border ${dark ? "border-gold/25" : "border-gold/30"}`} />
+      {(["tl", "tr", "bl", "br"] as const).map((p) => (
+        <svg
+          key={p}
+          viewBox="0 0 40 40"
+          className={`absolute h-8 w-8 sm:h-10 sm:w-10 ${
+            { tl: "-left-[3px] -top-[3px]", tr: "-right-[3px] -top-[3px] -scale-x-100", bl: "-bottom-[3px] -left-[3px] -scale-y-100", br: "-bottom-[3px] -right-[3px] -scale-100" }[p]
+          }`}
+        >
+          <path d="M2 2h12M2 2v12" stroke="#d9b45e" strokeWidth={1.6} fill="none" />
+          <path d="M6 18C6 10 10 6 18 6M10 22c0-7 5-12 12-12" stroke="#c9a24b" strokeWidth={0.9} fill="none" />
+          <circle cx={5} cy={5} r={1.8} fill="#e6c36f" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+/** A gold flourish divider with a heart at its centre that draws itself in. */
+export function Flourish({ className = "w-56", animate = true }: { className?: string; animate?: boolean }) {
+  const paths = [
+    "M120 14C112 6 100 8 102 16C104 22 120 26 120 26C120 26 136 22 138 16C140 8 128 6 120 14Z",
+    "M98 16H62C54 16 50 10 44 10C38 10 36 16 40 18C44 20 46 14 42 13",
+    "M142 16H178C186 16 190 10 196 10C202 10 204 16 200 18C196 20 194 14 198 13",
+    "M60 20H10",
+    "M180 20H230",
+  ];
