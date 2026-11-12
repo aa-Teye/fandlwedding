@@ -268,3 +268,30 @@ export function RoseCluster({ variant = 0 }: { variant?: 0 | 1 }) {
       <Bud x={24} y={244} r={160} s={0.9} tone={purpleFirst ? "purple" : "red"} />
       <BabysBreath x={118} y={70} r={20} s={0.8} />
       <BabysBreath x={70} y={118} r={-110} s={0.8} />
+    </>
+  );
+}
+
+type Pos = "tl" | "tr" | "bl" | "br";
+const mirror: Record<Pos, string> = {
+  tl: "",
+  tr: "scale(-1,1) translate(-300,0)",
+  bl: "scale(1,-1) translate(0,-300)",
+  br: "scale(-1,-1) translate(-300,-300)",
+};
+const place: Record<Pos, string> = {
+  tl: "left-0 top-0",
+  tr: "right-0 top-0",
+  bl: "left-0 bottom-0",
+  br: "right-0 bottom-0",
+};
+
+/** One corner arrangement, positioned absolutely in its parent. */
+export function Corner({
+  pos = "tl",
+  className = "w-44 sm:w-72",
+  variant = 0,
+  style,
+}: {
+  pos?: Pos;
+  className?: string;
