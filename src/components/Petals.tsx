@@ -175,3 +175,28 @@ export function PetalField({ active = true }: { active?: boolean }) {
       if (p.y > h + 40 || p.x < -80 || p.x > w + 80) {
         const sparse = window.scrollY > window.innerHeight * 0.9;
         Object.assign(p, petal(rand(0, w), -40 - (sparse ? rand(0, h * 1.6) : rand(0, 120)), p.size));
+      }
+      return true;
+    },
+    { running: active },
+  );
+  return <canvas ref={ref} aria-hidden="true" className="pointer-events-none fixed inset-0 z-20 h-full w-full" />;
+}
+
+/** A one-off burst of petals and gold dust from the centre of the screen. */
+export function PetalBurst({ fire, onDone }: { fire: boolean; onDone?: () => void }) {
+  const ref = useCanvas(
+    ({ w, h }) => {
+      const cx = w / 2;
+      const cy = h * 0.5;
+      const big = w >= 640;
+      const petals = Array.from({ length: big ? 70 : 46 }, () => {
+        const a = rand(0, Math.PI * 2);
+        const v = rand(4, big ? 15 : 11);
+        const p = petal(cx + rand(-20, 20), cy + rand(-20, 20), rand(14, big ? 30 : 24));
+        p.vx = Math.cos(a) * v;
+        p.vy = Math.sin(a) * v - rand(2, 5);
+        p.vr = rand(-0.12, 0.12);
+        p.vflip = rand(0.06, 0.16);
+        return p;
+      });
