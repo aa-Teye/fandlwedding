@@ -54,3 +54,31 @@ export function Venue() {
         </a>
         <button onClick={downloadIcs} className="btn btn-outline">Apple / Outlook</button>
       </Reveal>
+    </Section>
+  );
+}
+
+// Schedule times are local Accra time (UTC+0) on the wedding day.
+function scheduleTime(time: string) {
+  const m = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!m) return null;
+  let h = Number(m[1]) % 12;
+  if (m[3].toUpperCase() === "PM") h += 12;
+  const d = new Date(wedding.date);
+  d.setUTCHours(h, Number(m[2]), 0, 0);
+  return d.getTime();
+}
+
+function useNow(interval = 30000) {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    setNow(Date.now());
+    const id = setInterval(() => setNow(Date.now()), interval);
+    return () => clearInterval(id);
+  }, [interval]);
+  return now;
+}
+
+export function Schedule() {
+  const now = useNow();
+  const dayStart = new Date(wedding.date);
