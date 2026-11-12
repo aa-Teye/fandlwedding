@@ -74,3 +74,28 @@ function useCanvas(
   step: (p: Particle, i: number, size: { w: number; h: number }, t: number) => boolean,
   opts: { running: boolean; onDone?: () => void },
 ) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  const setupRef = useRef(setup);
+  const stepRef = useRef(step);
+  const doneRef = useRef(opts.onDone);
+  setupRef.current = setup;
+  stepRef.current = step;
+  doneRef.current = opts.onDone;
+
+  useEffect(() => {
+    if (!opts.running || reduced()) return;
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const sprites = makeSprites();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const size = { w: 0, h: 0 };
+    const resize = () => {
+      size.w = canvas.clientWidth;
+      size.h = canvas.clientHeight;
+      canvas.width = Math.round(size.w * dpr);
+      canvas.height = Math.round(size.h * dpr);
+    };
+    resize();
+    window.addEventListener("resize", resize);
