@@ -25,3 +25,30 @@ function parts(ms: number) {
 const face =
   "absolute inset-x-0 overflow-hidden bg-gradient-to-b from-[#4f1a78] to-[#2c0b44] text-gold-pale";
 
+function Half({ value, top }: { value: string; top: boolean }) {
+  return (
+    <div className={`${face} ${top ? "top-0 h-1/2 rounded-t-xl" : "bottom-0 h-1/2 rounded-b-xl"}`}>
+      <div className={`absolute inset-x-0 flex h-[200%] items-center justify-center ${top ? "top-0" : "bottom-0"}`}>
+        <span className="gold-text font-display text-[2.1rem] font-semibold tabular-nums sm:text-5xl">{value}</span>
+      </div>
+    </div>
+  );
+}
+
+/** A flip-clock card: the top flap folds down to reveal the new number. */
+function Flip({ value }: { value: string }) {
+  const [cur, setCur] = useState(value);
+  const [prev, setPrev] = useState(value);
+  if (value !== cur) {
+    setPrev(cur);
+    setCur(value);
+  }
+  return (
+    <div className="relative h-[4.6rem] w-[4.1rem] [perspective:400px] sm:h-28 sm:w-24">
+      <Half value={cur} top />
+      <Half value={prev} top={false} />
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={`t${cur}`}
+          className="absolute inset-0 [backface-visibility:hidden]"
+          initial={{ rotateX: 0 }}
