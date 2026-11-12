@@ -107,3 +107,30 @@ export const dressCode = {
     { name: "Light Green", hex: "#B9DC8C" },
   ],
 };
+
+export const gifts: {
+  intro: string;
+  accounts: { method: string; rows: { label: string; value: string }[] }[];
+} = {
+  intro: "Your presence is the greatest gift. Should you wish to bless us further, here are a few ways.",
+  accounts: [], // TODO Mobile Money / bank details
+};
+
+// RSVP: replies from the form go to the first number on WhatsApp.
+export const rsvp = {
+  by: "", // TODO e.g. "Kindly respond by 5th December 2026"
+  contacts: [
+    { name: "", phone: "0246531897" }, // TODO name
+    { name: "", phone: "0546024584" }, // TODO name; printed as 546024584 on the card
+  ],
+};
+
+export const faqs = [
+  {
+    q: "What time should I arrive?",
+    a: "Please arrive by 1:00pm so you're seated before the ceremony begins at 1:30pm prompt.",
+  },
+  {
+    q: "Where is the church?",
+    a: "Overcomers Nation Church, opposite Ayrton Drugs, Tesano, Accra. Tap \"Open in Maps\" in the venue section for directions.",
+  },
