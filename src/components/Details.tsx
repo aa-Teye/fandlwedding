@@ -248,3 +248,31 @@ function CopyRow({ label, value }: { label: string; value: string }) {
         <p className="text-[0.62rem] uppercase tracking-[0.2em] text-muted">{label}</p>
         <p className="font-serif text-xl font-semibold text-purple">{value}</p>
       </div>
+      <button
+        onClick={() => {
+          navigator.clipboard?.writeText(value);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        }}
+        className="rounded-full border border-gold/60 px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-gold-deep hover:bg-gold hover:text-white"
+      >
+        {copied ? "Copied" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
+export function Gifts() {
+  return (
+    <Section id="gifts" eyebrow="Blessings" title="Gifts" subtitle={gifts.intro} art="gift">
+      {gifts.accounts.length > 0 ? (
+        <div className={`grid gap-6 ${gifts.accounts.length > 1 ? "sm:grid-cols-2" : "mx-auto max-w-md"}`}>
+          {gifts.accounts.map((g, i) => (
+            <Reveal key={g.method} delay={i * 0.1} className="card p-6">
+              <p className="eyebrow mb-2">{g.method}</p>
+              {g.rows.map((r) => (
+                <CopyRow key={r.label} {...r} />
+              ))}
+            </Reveal>
+          ))}
+        </div>
