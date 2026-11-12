@@ -22,3 +22,27 @@ export function ExperienceLoader({ onLoaded }: { onLoaded: () => void }) {
       img.onerror = tick;
       img.src = src;
     });
+    if ("fonts" in document) document.fonts.ready.then(tick).catch(tick);
+    else tick();
+
+    const interval = setInterval(() => setProgress((p) => (p >= 95 ? 95 : p + 5)), 110);
+    const finish = setTimeout(() => {
+      setProgress(100);
+      setTimeout(() => {
+        if (!mounted) return;
+        setDone(true);
+        onLoaded();
+      }, 380);
+    }, 1700);
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+      clearTimeout(finish);
+    };
+  }, [onLoaded]);
+
+  return (
+    <AnimatePresence>
+      {!done && (
+        <motion.div
+          key="loader"
