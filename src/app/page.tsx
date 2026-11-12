@@ -51,3 +51,29 @@ export default function Home() {
             if (music.enabled) audioRef.current?.play().catch(() => {});
           }}
           onOpen={() => setOpened(true)}
+        />
+      )}
+      {music.enabled && <audio ref={audioRef} src={music.src} loop preload="auto" />}
+      {music.enabled && opened && <MusicToggle audio={audioRef} />}
+      {effects.petals && opened && <PetalField />}
+      {opened && <Nav />}
+      <main>
+        <Hero show={opened} guest={guest} />
+        <Countdown />
+        <Livestream />
+        <Invitation />
+        <Gallery />
+        <Venue />
+        <Schedule />
+        <Programme />
+        <Ministers />
+        <DressCode />
+        <Gifts />
+        <Rsvp guest={guest} />
+        <Faq />
+        <Note />
+        <Footer />
+      </main>
+    </MotionConfig>
+  );
+}
