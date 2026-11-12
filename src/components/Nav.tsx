@@ -73,3 +73,27 @@ export function Nav() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="velvet fixed inset-0 z-30 flex flex-col items-center justify-center gap-1 overflow-hidden pt-14"
+          >
+            <Corner pos="bl" className="w-36 opacity-90" />
+            <Corner pos="br" className="w-36 opacity-90" variant={1} />
+            {links.map(([id, label], i) => (
+              <motion.a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setOpen(false)}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.04 * i }}
+                className="relative z-10 py-2 font-display text-xl tracking-[0.08em] text-gold-pale transition hover:text-gold-soft"
+              >
+                {label}
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
