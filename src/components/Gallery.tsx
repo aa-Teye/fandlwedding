@@ -47,3 +47,28 @@ export function Gallery() {
       <AnimatePresence>
         {open !== null && (
           <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-purple-night/95 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(null)}
+          >
+            <Image
+              key={gallery[open].src}
+              src={gallery[open].src}
+              alt={gallery[open].alt}
+              width={gallery[open].width}
+              height={gallery[open].height}
+              sizes="100vw"
+              className="h-auto max-h-[85vh] w-auto max-w-full rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button aria-label="Close" onClick={() => setOpen(null)} className="absolute right-4 top-4 text-3xl text-white">
+              &times;
+            </button>
+            {n > 1 && (
+              <>
+                <button
+                  aria-label="Previous photo"
+                  className={`${arrow} left-3`}
+                  onClick={(e) => {
