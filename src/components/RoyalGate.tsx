@@ -53,3 +53,30 @@ function Door({ side, opening }: { side: "left" | "right"; opening: boolean }) {
             strokeOpacity={0.35}
             strokeWidth={1}
             vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+
+        <Corner pos={left ? "tl" : "tr"} className="w-[92%] max-w-[360px]" />
+        <Corner pos={left ? "bl" : "br"} className="w-[78%] max-w-[300px]" variant={1} />
+
+        {/* this door's half of the satin ribbon */}
+        <div
+          className="absolute top-[56%] h-9 w-full -translate-y-1/2 sm:h-11"
+          style={{ background: satinBand, boxShadow: "0 6px 14px -6px rgba(10,0,18,0.7)" }}
+        >
+          <div className="absolute inset-x-0 top-[3px] h-px bg-gold-soft/50" />
+          <div className="absolute inset-x-0 bottom-[3px] h-px bg-gold-soft/50" />
+        </div>
+
+        {/* the gold edge where the doors meet */}
+        <div
+          className={`absolute top-0 h-full w-[2px] ${left ? "right-0" : "left-0"} bg-gradient-to-b from-gold-deep via-gold-soft to-gold-deep`}
+          style={{ maskImage: seamMask, WebkitMaskImage: seamMask }}
+        />
+
+        {/* the door darkens as it turns away from the light */}
+        <motion.div
+          className="absolute inset-0 bg-[#0b0012]"
+          initial={false}
+          animate={{ opacity: opening ? 0.6 : 0 }}
+          transition={{ delay: DOORS_AT, duration: DOORS_FOR, ease: "easeIn" }}
