@@ -48,3 +48,28 @@ export default function InvitePage() {
 
   useEffect(() => setOrigin(window.location.origin), []);
 
+  const rows = useMemo(
+    () =>
+      names
+        .split("\n")
+        .map((n) => n.trim().slice(0, 60))
+        .filter(Boolean)
+        .slice(0, 300)
+        .map((name) => {
+          const link = `${origin}/?to=${encodeURIComponent(name)}`;
+          return { name, link, text: inviteMessage(name, link) };
+        }),
+    [names, origin],
+  );
+
+  const copy = (key: string, text: string) => {
+    navigator.clipboard?.writeText(text);
+    setCopied(key);
+    setTimeout(() => setCopied(null), 1500);
+  };
+
+  return (
+    <main className="paper min-h-screen px-6 py-16">
+      <div className="mx-auto max-w-2xl">
+        <p className="eyebrow text-center">For the couple</p>
+        <h1 className="mt-2 text-center font-display text-3xl text-purple sm:text-4xl">Personal Invitations</h1>
