@@ -52,3 +52,30 @@ export function FloralDefs() {
           <stop offset="1" stopColor="#8a6420" />
         </linearGradient>
         <radialGradient id="fl-hyd" cx="0.4" cy="0.35" r="0.75">
+          <stop offset="0" stopColor="#f1f8df" />
+          <stop offset="0.6" stopColor="#c9e3a1" />
+          <stop offset="1" stopColor="#97bf68" />
+        </radialGradient>
+        {/* satin ribbon (tomato red) */}
+        <linearGradient id="fl-satin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#a8200f" />
+          <stop offset="0.3" stopColor="#f0644a" />
+          <stop offset="0.45" stopColor="#ffae94" />
+          <stop offset="0.6" stopColor="#e0442e" />
+          <stop offset="1" stopColor="#8c1a0b" />
+        </linearGradient>
+        <linearGradient id="fl-satin-dark" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#6e1207" />
+          <stop offset="1" stopColor="#b42a17" />
+        </linearGradient>
+        <linearGradient id="fl-satin-tail" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#9a1d0d" />
+          <stop offset="0.35" stopColor="#e85a40" />
+          <stop offset="0.55" stopColor="#ff9b80" />
+          <stop offset="0.75" stopColor="#d23d27" />
+          <stop offset="1" stopColor="#821709" />
+        </linearGradient>
+        {/* gold wax seal */}
+        <radialGradient id="fl-seal" cx="0.38" cy="0.32" r="0.8">
+          <stop offset="0" stopColor="#fff3c8" />
+          <stop offset="0.35" stopColor="#e6c36f" />
