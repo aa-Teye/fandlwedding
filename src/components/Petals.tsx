@@ -99,3 +99,29 @@ function useCanvas(
     };
     resize();
     window.addEventListener("resize", resize);
+    let particles = setupRef.current(size);
+    let raf = 0;
+    let last = performance.now();
+    let t = 0;
+    const frame = (now: number) => {
+      const dt = Math.min(2.5, (now - last) / 16.67);
+      last = now;
+      t += dt;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter((p, i) => {
+        // apply the step dt times' worth of motion
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.rot += p.vr * dt;
+        p.flip += p.vflip * dt;
+        const keep = stepRef.current(p, i, size, t);
+        if (!keep) return false;
+        const sway = Math.sin(t * p.swaySpeed + p.phase) * p.swayAmp;
+        const s = p.size * dpr;
+        ctx.setTransform(1, 0, 0, 1, (p.x + sway) * dpr, p.y * dpr);
+        ctx.rotate(p.rot);
+        if (!p.gold) ctx.scale(Math.cos(p.flip) * 0.85 + 0.15 * Math.sign(Math.cos(p.flip) || 1), 1);
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha * p.life));
+        ctx.drawImage(sprites[p.gold ? sprites.length - 1 : p.sprite], -s / 2, -s / 2, s, s);
+        return true;
