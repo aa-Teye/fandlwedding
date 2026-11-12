@@ -52,3 +52,29 @@ function Flip({ value }: { value: string }) {
           key={`t${cur}`}
           className="absolute inset-0 [backface-visibility:hidden]"
           initial={{ rotateX: 0 }}
+          animate={{ rotateX: -90 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: "easeIn" }}
+        >
+          <Half value={prev} top />
+        </motion.div>
+        <motion.div
+          key={`b${cur}`}
+          className="absolute inset-0 [backface-visibility:hidden]"
+          initial={{ rotateX: 90 }}
+          animate={{ rotateX: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, delay: 0.3, ease: "easeOut" }}
+        >
+          <Half value={cur} top={false} />
+        </motion.div>
+      </AnimatePresence>
+      <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-black/50" />
+      <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-gold/40" />
+    </div>
+  );
+}
+
+export function Countdown() {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
