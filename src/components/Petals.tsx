@@ -49,3 +49,28 @@ function makeSprites() {
     g.moveTo(32, 20);
     g.bezierCurveTo(31, 34, 32, 46, 32, 56);
     g.stroke();
+    return c;
+  });
+  // gold dust
+  const d = document.createElement("canvas");
+  d.width = d.height = 32;
+  const g = d.getContext("2d")!;
+  const grad = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+  grad.addColorStop(0, "rgba(255,248,215,1)");
+  grad.addColorStop(0.25, "rgba(240,206,120,0.95)");
+  grad.addColorStop(0.6, "rgba(201,162,75,0.35)");
+  grad.addColorStop(1, "rgba(201,162,75,0)");
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 32, 32);
+  sprites.push(d);
+  return sprites;
+}
+
+const reduced = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function useCanvas(
+  setup: (ctx: { w: number; h: number }) => Particle[],
+  step: (p: Particle, i: number, size: { w: number; h: number }, t: number) => boolean,
+  opts: { running: boolean; onDone?: () => void },
+) {
