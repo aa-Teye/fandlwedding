@@ -162,3 +162,31 @@ export function RoyalGate({
         {!gone && (
           <motion.div
             role="button"
+            tabIndex={0}
+            aria-label="Open the invitation"
+            onClick={open}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                open();
+              }
+            }}
+            className="fixed inset-0 z-50 cursor-pointer select-none overflow-hidden bg-purple-night outline-none"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          >
+            {/* the light waiting behind the doors */}
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 52%, #fffdf6 0%, #fbefcf 16%, #e8c67a 34%, #9a5cc8 62%, #3b1258 82%, #1b0629 100%)",
+              }}
+              initial={false}
+              animate={opening ? { scale: 1.25 } : { scale: 1 }}
+              transition={{ duration: 2.4, ease: "easeOut" }}
+            />
+            <div
+              className="absolute left-1/2 top-[52%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 animate-[rays_40s_linear_infinite] opacity-60 motion-reduce:animate-none"
+              style={{
+                background: "repeating-conic-gradient(from 0deg, rgba(255,246,214,0.5) 0deg 4deg, transparent 4deg 15deg)",
