@@ -47,3 +47,27 @@ export default function ProgrammePage() {
             <div className="mt-2 space-y-1">
               {g.names.map((m) => (
                 <p key={m} className="font-serif text-xl font-semibold text-purple">
+                  {m}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        <div className="mt-12 text-center">
+          <p className="font-serif text-xl italic text-purple">&ldquo;{scripture.text}&rdquo;</p>
+          <p className="eyebrow mt-1">{scripture.ref}</p>
+        </div>
+
+        <div className="mt-10 text-center print:hidden">
+          <Link href="/" className="btn btn-outline">
+            Visit the wedding website
+          </Link>
+          <div className="mt-8">
+            <Credit dark={false} />
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
