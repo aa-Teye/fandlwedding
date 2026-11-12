@@ -70,3 +70,26 @@ export function ExperienceLoader({ onLoaded }: { onLoaded: () => void }) {
               className="flex items-baseline"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="gold-foil px-1 font-script text-5xl">{couple.groom[0]}</span>
+              <span className="gold-text font-serif text-2xl italic">&amp;</span>
+              <span className="gold-foil px-1 font-script text-5xl">{couple.bride[0]}</span>
+            </motion.p>
+          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.6 }}
+            className="mt-7 font-serif text-2xl italic text-gold-pale"
+          >
+            Preparing your invitation…
+          </motion.p>
+          <p className="mt-2 text-[0.65rem] uppercase tracking-[0.3em] text-gold-soft/80">
+            {couple.groom} &amp; {couple.bride}
+          </p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
