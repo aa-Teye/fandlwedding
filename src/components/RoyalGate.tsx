@@ -244,3 +244,30 @@ export function RoyalGate({
                 initial={{ opacity: 0, scale: 0.2 }}
                 animate={opening ? { opacity: [0, 1, 0], scale: [0.2, 2.4, 3.2] } : { opacity: 0, scale: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.25 }}
+              />
+            </div>
+
+            <motion.div
+              className="pointer-events-none absolute inset-x-0 top-[75%] z-10 text-center sm:top-[77%]"
+              initial={{ opacity: 0 }}
+              animate={opening ? { opacity: 0 } : { opacity: 1 }}
+              transition={opening ? { duration: 0.3 } : { delay: 0.8, duration: 1 }}
+            >
+              <motion.p
+                className="inline-block rounded-full border border-gold/40 bg-purple-night/45 px-6 py-1.5 font-serif text-xl italic text-gold-pale backdrop-blur-[2px]"
+                animate={opening ? {} : { opacity: [0.55, 1, 0.55] }}
+                transition={{ duration: 2.6, repeat: Infinity }}
+              >
+                Tap to open
+              </motion.p>
+              <p className="mt-2 font-display text-[0.7rem] tracking-[0.4em] text-gold-soft/90">
+                {wedding.day} · {String(new Date(wedding.date).getUTCMonth() + 1).padStart(2, "0")} · {wedding.year}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {burst && <PetalBurst fire={burst} onDone={() => setBurst(false)} />}
+    </>
+  );
+}
