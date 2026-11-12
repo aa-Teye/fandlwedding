@@ -21,3 +21,26 @@ export function HymnLyrics({
         </svg>
         <span>{open ? "Hide lyrics" : "View lyrics"}</span>
       </button>
+
+      <div
+        className={`${
+          open ? "block" : "hidden"
+        } print:block mt-3 space-y-4 rounded-xl border border-gold/25 bg-ivory/90 p-4 text-left shadow-sm sm:p-5`}
+      >
+        {lyrics.map((s, idx) => (
+          <div key={idx} className="flex gap-3">
+            <span className="pt-0.5 font-sans text-xs font-semibold text-gold-deep min-w-4 shrink-0">
+              {s.label ?? s.stanza}
+            </span>
+            <div className="font-serif text-base italic leading-relaxed text-purple">
+              {s.lines.map((l, li) => (
+                <p key={li}>{l}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
