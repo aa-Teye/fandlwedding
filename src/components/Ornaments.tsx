@@ -102,3 +102,28 @@ export function Flourish({ className = "w-56", animate = true }: { className?: s
 }
 
 /** Two interlocked gold rings. */
+export function Rings({ className = "w-16" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 80 52" className={className} aria-hidden="true" fill="none">
+      <circle cx={30} cy={30} r={17} stroke="url(#fl-gold)" strokeWidth={4} />
+      <circle cx={50} cy={30} r={17} stroke="url(#fl-gold)" strokeWidth={4} />
+      <path d="M45 10l5-6 5 6-5 5z" fill="#fff4cc" stroke="#c9a24b" strokeWidth={0.8} />
+      <circle cx={30} cy={30} r={17} stroke="#fff4cc" strokeOpacity={0.5} strokeWidth={0.8} strokeDasharray="10 30" />
+    </svg>
+  );
+}
+
+/** Shows "&" in an elegant serif italic, since script fonts draw it oddly. */
+export function Amp({ text, className = "font-serif italic" }: { text: string; className?: string }) {
+  const parts = text.split("&");
+  return (
+    <>
+      {parts.map((p, i) => (
+        <span key={i}>
+          {p}
+          {i < parts.length - 1 && <span className={className}>&amp;</span>}
+        </span>
+      ))}
+    </>
+  );
+}
