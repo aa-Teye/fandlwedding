@@ -74,3 +74,29 @@ export function Illustration({
   className = "h-16 w-16",
   dark = false,
 }: {
+  name: ArtName;
+  className?: string;
+  dark?: boolean;
+}) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} fill="none" aria-hidden="true">
+      <motion.circle
+        cx={32}
+        cy={32}
+        r={31}
+        fill={dark ? "rgba(255,240,200,0.06)" : "rgba(201,162,75,0.08)"}
+        initial={{ scale: 0.4, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      />
+      {art[name].map((d, i) => (
+        <motion.path
+          key={i}
+          d={d}
+          stroke={dark ? "#ecd08f" : "#b8892f"}
+          strokeWidth={1.4}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          whileInView={{ pathLength: 1, opacity: 1 }}
