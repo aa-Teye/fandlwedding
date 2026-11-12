@@ -109,3 +109,31 @@ export function Schedule() {
             <span
               className={`absolute -left-[2.15rem] top-1 flex h-5 w-5 items-center justify-center rounded-full border border-gold bg-cream ${
                 i === current ? "ring-4 ring-gold/30" : ""
+              }`}
+            >
+              <span className={`h-2 w-2 rounded-full ${i === current ? "bg-tomato" : "bg-gold"}`} />
+            </span>
+            <p className="eyebrow">
+              {s.time}
+              {i === current && (
+                <span className="ml-2 rounded-full bg-purple px-2 py-0.5 text-[0.55rem] tracking-[0.15em] text-white">
+                  Happening now
+                </span>
+              )}
+            </p>
+            <h3 className="mt-1 font-display text-xl font-semibold tracking-[0.04em] text-purple">{s.title}</h3>
+            <p className="mt-0.5 font-serif text-lg text-muted">{s.note}</p>
+          </Reveal>
+        ))}
+      </ol>
+    </Section>
+  );
+}
+
+export function ProgrammeList({ items }: { items: typeof orderOfService }) {
+  return (
+    <ol>
+      {items.map((o, i) => (
+        <li key={o.item} className="flex gap-4 border-b border-gold/20 px-5 py-4 last:border-0 sm:px-7">
+          <span className="w-8 shrink-0 font-display text-lg text-gold-deep">{String(i + 1).padStart(2, "0")}</span>
+          <div className="flex-1">
