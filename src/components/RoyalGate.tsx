@@ -80,3 +80,31 @@ function Door({ side, opening }: { side: "left" | "right"; opening: boolean }) {
           initial={false}
           animate={{ opacity: opening ? 0.6 : 0 }}
           transition={{ delay: DOORS_AT, duration: DOORS_FOR, ease: "easeIn" }}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+function Bow({ opening }: { opening: boolean }) {
+  const t = { duration: 0.75, ease: [0.4, 0, 0.6, 1] as const };
+  const loop = (dir: 1 | -1) => (
+    <motion.g
+      style={{ originX: dir === -1 ? 1 : 0, originY: 0.55 }}
+      initial={false}
+      animate={opening ? { x: dir * 70, y: -26, rotate: dir * 32, scale: 0.4, opacity: 0 } : { x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
+      transition={{ ...t, delay: 0.12 }}
+    >
+      <g transform={dir === 1 ? "scale(-1,1)" : undefined}>
+        <path d="M-6-4C-30-46-100-76-130-46C-152-22-128 16-80 12C-50 10-24 4-6 6Z" fill="url(#fl-satin)" />
+        <path d="M-10-1C-36-32-94-54-114-36C-100-24-60-10-10-1Z" fill="url(#fl-satin-dark)" opacity={0.85} />
+        <path d="M-16-14C-46-48-98-64-122-42" stroke="#ffd3c4" strokeOpacity={0.7} strokeWidth={2.6} fill="none" strokeLinecap="round" />
+        <path d="M-12 8C-34 12-72 18-100 8" stroke="#5a0d04" strokeOpacity={0.4} strokeWidth={2} fill="none" strokeLinecap="round" />
+      </g>
+    </motion.g>
+  );
+  const tail = (dir: 1 | -1, d: string) => (
+    <motion.g
+      style={{ originX: 0.5, originY: 0 }}
+      initial={false}
+      animate={opening ? { y: 90, x: dir * 34, rotate: dir * 18, opacity: 0 } : { y: 0, x: 0, rotate: 0, opacity: 1 }}
