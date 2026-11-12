@@ -82,3 +82,31 @@ body {
   .gold-foil {
     background-image: linear-gradient(100deg, #a8792b 0%, #e9cd7f 16%, #fff4cc 27%, #d4aa4f 42%, #9c7428 55%, #e9cd7f 72%, #fff4cc 84%, #b8892f 100%);
     background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: foil 7s linear infinite;
+  }
+
+  .gold-text {
+    background-image: linear-gradient(180deg, #f7e2a6 0%, #d9b45e 45%, #a8792b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold) 20%, var(--color-gold-soft) 50%, var(--color-gold) 80%, transparent);
+  }
+
+  .card {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(201, 162, 75, 0.35);
+    background: rgba(255, 252, 246, 0.82);
+    box-shadow: 0 18px 40px -26px rgba(42, 10, 64, 0.55);
+    backdrop-filter: blur(6px);
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
