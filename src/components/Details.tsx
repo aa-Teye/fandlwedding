@@ -137,3 +137,31 @@ export function ProgrammeList({ items }: { items: typeof orderOfService }) {
         <li key={o.item} className="flex gap-4 border-b border-gold/20 px-5 py-4 last:border-0 sm:px-7">
           <span className="w-8 shrink-0 font-display text-lg text-gold-deep">{String(i + 1).padStart(2, "0")}</span>
           <div className="flex-1">
+            <p className="font-serif text-xl font-semibold text-purple">{o.item}</p>
+            {o.by && <p className="text-sm text-muted">{o.by.join(" · ")}</p>}
+            {o.lyrics && <HymnLyrics lyrics={o.lyrics} />}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export function Programme() {
+  const [open, setOpen] = useState(false);
+  const shown = open ? orderOfService : orderOfService.slice(0, 6);
+  return (
+    <Section
+      id="programme"
+      eyebrow={church.name}
+      title="Order of Service"
+      subtitle={`The marriage ceremony of ${couple.groom} & ${couple.bride}`}
+      art="book"
+      className="champagne"
+    >
+      {orderOfService.length > 0 ? (
+        <>
+          <Reveal className="card p-0">
+            <ProgrammeList items={shown} />
+          </Reveal>
+          <div className="mt-6 text-center">
