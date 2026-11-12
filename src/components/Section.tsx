@@ -47,3 +47,27 @@ export function SectionTitle({
   dark?: boolean;
 }) {
   return (
+    <div className="text-center">
+      {art && <Illustration name={art} dark={dark} className="mx-auto mb-4 h-16 w-16 sm:h-20 sm:w-20" />}
+      <Reveal>
+        {eyebrow && <p className={`eyebrow mb-3 ${dark ? "!text-gold-soft" : ""}`}>{eyebrow}</p>}
+        <h2
+          className={`font-display text-[1.75rem] font-medium leading-snug tracking-[0.06em] sm:text-4xl ${
+            dark ? "gold-text" : "text-purple"
+          }`}
+        >
+          {title}
+        </h2>
+        {subtitle && (
+          <p className={`mt-3 text-balance font-serif text-xl italic ${dark ? "text-gold-pale/80" : "text-muted"}`}>{subtitle}</p>
+        )}
+      </Reveal>
+      <Flourish className="mx-auto mt-4 w-52 sm:w-60" />
+    </div>
+  );
+}
+
+export function Section({
+  id,
+  eyebrow,
+  title,
