@@ -71,3 +71,27 @@ export function Section({
   id,
   eyebrow,
   title,
+  subtitle,
+  art,
+  children,
+  className = "paper",
+  width = "max-w-3xl",
+}: {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  art?: ArtName;
+  children: React.ReactNode;
+  className?: string;
+  width?: string;
+}) {
+  return (
+    <section id={id} className={`relative scroll-mt-14 overflow-hidden px-6 py-20 sm:py-28 ${className}`}>
+      <div className={`relative z-10 mx-auto ${width}`}>
+        <SectionTitle eyebrow={eyebrow} title={title} subtitle={subtitle} art={art} />
+        <div className="mt-12">{children}</div>
+      </div>
+    </section>
+  );
+}
