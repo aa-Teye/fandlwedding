@@ -150,3 +150,28 @@ function useCanvas(
   }, [opts.running]);
 
   return ref;
+}
+
+const rand = (a: number, b: number) => a + Math.random() * (b - a);
+
+function petal(x: number, y: number, size: number): Particle {
+  return {
+    x, y, vx: rand(-0.25, 0.25), vy: rand(0.55, 1.25),
+    rot: rand(0, Math.PI * 2), vr: rand(-0.025, 0.025), flip: rand(0, Math.PI * 2), vflip: rand(0.02, 0.06),
+    size, sprite: Math.floor(Math.random() * PETAL_COLOURS.length),
+    phase: rand(0, Math.PI * 2), swayAmp: rand(8, 26), swaySpeed: rand(0.01, 0.025),
+    alpha: rand(0.75, 0.95), gold: false, life: 1, decay: 0,
+  };
+}
+
+/** Rose petals drifting down the whole page. Sparser once guests scroll past the top. */
+export function PetalField({ active = true }: { active?: boolean }) {
+  const ref = useCanvas(
+    ({ w, h }) => {
+      const n = w < 640 ? 16 : 28;
+      return Array.from({ length: n }, () => petal(rand(0, w), rand(-h, h), rand(w < 640 ? 12 : 14, w < 640 ? 20 : 26)));
+    },
+    (p, _i, { w, h }) => {
+      if (p.y > h + 40 || p.x < -80 || p.x > w + 80) {
+        const sparse = window.scrollY > window.innerHeight * 0.9;
+        Object.assign(p, petal(rand(0, w), -40 - (sparse ? rand(0, h * 1.6) : rand(0, 120)), p.size));
