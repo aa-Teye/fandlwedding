@@ -82,3 +82,30 @@ function useNow(interval = 30000) {
 export function Schedule() {
   const now = useNow();
   const dayStart = new Date(wedding.date);
+  dayStart.setUTCHours(0, 0, 0, 0);
+  const dayEnd = new Date(wedding.date);
+  dayEnd.setUTCHours(23, 59, 59, 999);
+  let current = -1;
+  if (now !== null && now >= dayStart.getTime() && now <= dayEnd.getTime()) {
+    schedule.forEach((s, i) => {
+      const t = scheduleTime(s.time);
+      if (t !== null && t <= now) current = i;
+    });
+  }
+
+  return (
+    <Section id="schedule" eyebrow="When" title="Schedule" subtitle="Our celebration, step by step" art="clock">
+      <ol className="relative mx-auto max-w-lg pl-10">
+        <motion.span
+          aria-hidden="true"
+          className="absolute bottom-2 left-[0.6rem] top-2 w-px origin-top bg-gradient-to-b from-gold via-gold-soft to-gold/20"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1.6, ease: "easeInOut" }}
+        />
+        {schedule.map((s, i) => (
+          <Reveal key={s.title} delay={0.2 + i * 0.15} from="left" className="relative mb-10 last:mb-0">
+            <span
+              className={`absolute -left-[2.15rem] top-1 flex h-5 w-5 items-center justify-center rounded-full border border-gold bg-cream ${
+                i === current ? "ring-4 ring-gold/30" : ""
