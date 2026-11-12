@@ -331,3 +331,31 @@ export function Note() {
         <Reveal>
           <p className="eyebrow !text-gold-soft">From our hearts</p>
           <h2 className="gold-foil mx-auto mt-1 w-fit px-4 pb-2 font-script text-5xl sm:text-6xl">A note from us</h2>
+          <Flourish className="mx-auto mt-2 w-48" />
+          <p className="mx-auto mt-8 max-w-xl font-serif text-2xl italic leading-relaxed text-gold-pale/90">&ldquo;{note.body}&rdquo;</p>
+          <p className="gold-foil mx-auto mt-6 w-fit px-3 pb-1 font-script text-4xl">
+            <Amp text={note.signoff} className="font-serif text-[0.75em] italic" />
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function ShareButton() {
+  const share = async () => {
+    const url = `${window.location.origin}/`;
+    const text = `You're invited to the wedding of ${couple.groom} & ${couple.bride}: ${wedding.displayDate}, ${wedding.displayTime}, ${venues[0].name}, ${venues[0].address}.`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: `${couple.groom} & ${couple.bride}`, text, url });
+      } catch {
+        /* closed the share sheet */
+      }
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`, "_blank");
+    }
+  };
+  return (
+    <button onClick={share} className="btn btn-outline-gold mt-8">
+      Share the invitation
