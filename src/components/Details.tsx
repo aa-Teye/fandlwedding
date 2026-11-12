@@ -26,3 +26,31 @@ export function Venue() {
                 {v.label} · {v.time}
               </p>
               <h3 className="mt-2 font-display text-xl font-semibold tracking-[0.06em] text-purple sm:text-2xl">{v.name}</h3>
+              <p className="mt-1 text-sm text-muted">{v.address}</p>
+              <div className="mt-5 overflow-hidden rounded-xl ring-1 ring-gold/40">
+                <iframe
+                  title={`${v.name} map`}
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(v.mapQuery)}&z=15&output=embed`}
+                  className="h-52 w-full border-0"
+                  loading="lazy"
+                />
+              </div>
+              <a href={mapsLink(v.mapQuery)} target="_blank" rel="noreferrer" className="btn btn-outline mt-5">
+                Open in Maps
+              </a>
+            </Reveal>
+          ) : (
+            <Reveal key={v.label} delay={i * 0.1} className="card flex flex-col items-center justify-center p-6 text-center">
+              <p className="eyebrow">{v.label}</p>
+              <h3 className="mt-2 font-display text-xl text-purple">Details to follow</h3>
+              <p className="mt-1 text-sm text-muted">We&rsquo;ll share the {v.label.toLowerCase()} venue here soon.</p>
+            </Reveal>
+          ),
+        )}
+      </div>
+      <Reveal className="mt-8 flex flex-wrap justify-center gap-3">
+        <a href={googleCalendarUrl()} target="_blank" rel="noreferrer" className="btn btn-primary">
+          Google Calendar
+        </a>
+        <button onClick={downloadIcs} className="btn btn-outline">Apple / Outlook</button>
+      </Reveal>
