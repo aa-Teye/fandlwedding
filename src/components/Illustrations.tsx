@@ -100,3 +100,28 @@ export function Illustration({
           strokeLinejoin="round"
           initial={{ pathLength: 0, opacity: 0 }}
           whileInView={{ pathLength: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: 1.6, delay: 0.2 + i * 0.35, ease: "easeInOut" }}
+        />
+      ))}
+    </svg>
+  );
+}
+
+// Deterministic "random" so the server and the browser draw the same sparkles.
+function seeded(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 16807) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+/** Twinkling gold stars scattered over a section. */
+export function Sparkles({ count = 18, seed = 7, className = "" }: { count?: number; seed?: number; className?: string }) {
+  const r = seeded(seed);
+  const items = Array.from({ length: count }, () => ({
+    x: (r() * 100).toFixed(2),
+    y: (r() * 100).toFixed(2),
+    s: Math.round(6 + r() * 12),
+    d: (r() * 5).toFixed(2),
