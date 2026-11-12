@@ -106,3 +106,30 @@ export function Rose({ x, y, s = 1, r = 0, tone = "red" }: RoseProps) {
   const core = red ? "url(#fl-red-core)" : "url(#fl-pur-core)";
   const line = red ? "#3a020a" : "#14031f";
   const light = red ? "#ff8f8a" : "#cfa6f2";
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      {[8, 80, 152, 224, 296].map((a) => (
+        <g key={`o${a}`} transform={`rotate(${a})`}>
+          <path d={PETAL_OUT} fill={g1} stroke={line} strokeOpacity={0.45} strokeWidth={0.8} />
+          <path d={PETAL_EDGE} fill="none" stroke={light} strokeOpacity={0.5} strokeWidth={1.3} strokeLinecap="round" />
+        </g>
+      ))}
+      {[44, 116, 188, 260, 332].map((a) => (
+        <g key={`m${a}`} transform={`rotate(${a}) scale(0.74)`}>
+          <path d={PETAL_OUT} fill={g2} stroke={line} strokeOpacity={0.5} strokeWidth={1} />
+          <path d={PETAL_EDGE} fill="none" stroke={light} strokeOpacity={0.55} strokeWidth={1.6} strokeLinecap="round" />
+        </g>
+      ))}
+      {[20, 110, 200, 290].map((a) => (
+        <g key={`i${a}`} transform={`rotate(${a}) scale(0.5)`}>
+          <path d={PETAL_OUT} fill={g1} stroke={line} strokeOpacity={0.55} strokeWidth={1.4} />
+          <path d={PETAL_EDGE} fill="none" stroke={light} strokeOpacity={0.6} strokeWidth={2.2} strokeLinecap="round" />
+        </g>
+      ))}
+      <circle r={15} fill={core} />
+      <path d={SPIRAL} fill="none" stroke={light} strokeOpacity={0.55} strokeWidth={1.4} strokeLinecap="round" />
+    </g>
+  );
+}
+
+export function Bud({ x, y, s = 1, r = 0, tone = "red" }: RoseProps) {
