@@ -190,3 +190,30 @@ export function RoyalGate({
               className="absolute left-1/2 top-[52%] h-[160vmax] w-[160vmax] -translate-x-1/2 -translate-y-1/2 animate-[rays_40s_linear_infinite] opacity-60 motion-reduce:animate-none"
               style={{
                 background: "repeating-conic-gradient(from 0deg, rgba(255,246,214,0.5) 0deg 4deg, transparent 4deg 15deg)",
+                maskImage: "radial-gradient(circle, black 0%, transparent 45%)",
+                WebkitMaskImage: "radial-gradient(circle, black 0%, transparent 45%)",
+              }}
+            />
+
+            <div className="absolute inset-0" style={{ perspective: "1800px" }}>
+              <Door side="left" opening={opening} />
+              <Door side="right" opening={opening} />
+            </div>
+
+            {/* words on the doors */}
+            <motion.div
+              className="pointer-events-none absolute inset-x-0 top-[17%] z-10 px-6 text-center sm:top-[15%]"
+              initial={{ opacity: 0, y: 14 }}
+              animate={opening ? { opacity: 0, y: -16 } : { opacity: 1, y: 0 }}
+              transition={opening ? { duration: 0.35 } : { delay: 0.3, duration: 1 }}
+            >
+              {guest && (
+                <p className="gold-foil mb-2 px-4 font-script text-[2.3rem] leading-tight sm:text-6xl">
+                  Dear <Amp text={guest} className="font-serif text-[0.8em] italic" />,
+                </p>
+              )}
+              <p className="text-[0.66rem] uppercase tracking-[0.34em] text-gold-soft sm:text-xs">You are cordially invited</p>
+              <p className="mt-1 font-serif text-lg italic text-gold-pale/90 sm:text-xl">to the wedding of</p>
+              <h1 className="mt-1 flex flex-col items-center leading-none">
+                <span className="gold-foil px-4 pb-1 font-script text-[3.3rem] leading-[1.15] sm:text-8xl">{couple.groom}</span>
+                <span className="gold-text -my-1 font-serif text-3xl italic sm:text-4xl">&amp;</span>
