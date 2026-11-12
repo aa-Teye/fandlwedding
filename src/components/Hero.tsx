@@ -97,3 +97,28 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
         )}
         <motion.p className="font-display text-[0.7rem] uppercase tracking-[0.32em] text-gold-soft sm:text-xs" {...fade(0.2)}>
           {invitation.tagline}
+        </motion.p>
+        <motion.div {...fade(0.3)}>
+          <Flourish className="mx-auto mt-3 w-44" />
+        </motion.div>
+
+        <motion.div className="mt-6" {...fade(0.4)}>
+          {photos.couple ? <Portrait /> : <Medallion />}
+        </motion.div>
+
+        <motion.h1 className="mt-8 flex flex-col items-center" {...fade(0.6)}>
+          <span className="gold-foil px-3 pb-1 font-script text-[3.2rem] leading-[1.1] sm:text-7xl">{couple.groomFull.first}</span>
+          <span className="gold-text font-display text-2xl font-semibold tracking-[0.2em] sm:text-3xl">{couple.groomFull.last.toUpperCase()}</span>
+          <span className="gold-text my-1 font-serif text-4xl italic">&amp;</span>
+          <span className="gold-foil px-3 pb-1 font-script text-[3.2rem] leading-[1.1] sm:text-7xl">{couple.brideFull.first}</span>
+          <span className="gold-text font-display text-2xl font-semibold tracking-[0.2em] sm:text-3xl">{couple.brideFull.last.toUpperCase()}</span>
+        </motion.h1>
+
+        <motion.div className="mt-8 w-full max-w-sm" {...fade(0.8)}>
+          <div className="gold-rule" />
+          <div className="flex items-stretch justify-center py-4 font-display text-gold-pale">
+            <div className="flex-1">
+              <p className="text-[0.7rem] tracking-[0.3em] text-gold-soft">{wedding.weekday.toUpperCase()}</p>
+              <p className="gold-text text-4xl font-semibold leading-tight">
+                {wedding.day}
+                <sup className="text-base">{wedding.daySuffix.toUpperCase()}</sup>
