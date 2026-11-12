@@ -78,3 +78,30 @@ function Flip({ value }: { value: string }) {
 export function Countdown() {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
+    setNow(Date.now());
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const phase = now === null || now < start ? "before" : now <= dayEnd ? "today" : "after";
+  const t = parts(Math.max(0, start - (now ?? start)));
+
+  return (
+    <section id="countdown" className="velvet relative scroll-mt-14 overflow-hidden px-6 py-20 text-center sm:py-24">
+      {effects.sparkles && <Sparkles count={20} seed={23} />}
+      <div className="relative z-10">
+        <Illustration name="hourglass" dark className="mx-auto mb-4 h-16 w-16 sm:h-20 sm:w-20" />
+        <Reveal>
+          {phase === "before" && (
+            <>
+              <p className="eyebrow !text-gold-soft">Counting down</p>
+              <h2 className="gold-foil mx-auto mt-1 w-fit px-4 pb-2 font-script text-5xl sm:text-6xl">To the big day</h2>
+              <Flourish className="mx-auto mt-2 w-48" />
+              <div className="mx-auto mt-8 flex max-w-md justify-center gap-2.5 sm:gap-4">
+                {Object.entries(t).map(([k, v]) => (
+                  <div key={k} className="flex flex-col items-center">
+                    <Flip value={now === null ? "--" : String(v).padStart(2, "0")} />
+                    <div className="mt-2 text-[0.6rem] uppercase tracking-[0.25em] text-gold-soft">{k}</div>
+                  </div>
+                ))}
+              </div>
