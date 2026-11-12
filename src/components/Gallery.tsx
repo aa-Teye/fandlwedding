@@ -72,3 +72,27 @@ export function Gallery() {
                   aria-label="Previous photo"
                   className={`${arrow} left-3`}
                   onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen((open - 1 + n) % n);
+                  }}
+                >
+                  &lsaquo;
+                </button>
+                <button
+                  aria-label="Next photo"
+                  className={`${arrow} right-3`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpen((open + 1) % n);
+                  }}
+                >
+                  &rsaquo;
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Section>
+  );
+}
