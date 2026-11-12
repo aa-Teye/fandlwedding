@@ -165,3 +165,31 @@ export function Programme() {
             <ProgrammeList items={shown} />
           </Reveal>
           <div className="mt-6 text-center">
+            {orderOfService.length > 6 && (
+              <button onClick={() => setOpen(!open)} className="btn btn-outline">
+                {open ? "Show less" : `View full programme (${orderOfService.length})`}
+              </button>
+            )}
+            <p className="mt-4">
+              <Link href="/programme" className="text-sm text-purple underline decoration-gold/60 underline-offset-4">
+                Open the order of service on its own page
+              </Link>
+            </p>
+          </div>
+        </>
+      ) : (
+        <Reveal className="card mx-auto max-w-md p-8 text-center">
+          <p className="font-display text-lg text-purple">Coming soon</p>
+          <p className="mt-2 font-serif text-lg text-muted">
+            The full order of service will be shared here, so you can follow along during the ceremony.
+          </p>
+        </Reveal>
+      )}
+    </Section>
+  );
+}
+
+export function Ministers() {
+  if (ministers.length === 0) return null;
+  return (
+    <Section id="ministers" eyebrow="With gratitude" title="Officiating Ministers" art="rings">
