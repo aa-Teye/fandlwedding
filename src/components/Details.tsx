@@ -276,3 +276,31 @@ export function Gifts() {
             </Reveal>
           ))}
         </div>
+      ) : (
+        <Reveal className="card mx-auto max-w-md p-8 text-center">
+          <p className="font-display text-lg text-purple">Details coming soon</p>
+          <p className="mt-2 font-serif text-lg text-muted">Mobile Money and bank details will be shared here.</p>
+        </Reveal>
+      )}
+    </Section>
+  );
+}
+
+export function Faq() {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <Section id="faq" eyebrow="Good to know" title="Questions" subtitle="Everything you might want to ask" art="question" className="champagne">
+      <div className="mx-auto max-w-xl">
+        {faqs.map((f, i) => (
+          <Reveal key={f.q} delay={i * 0.06} className="border-b border-gold/30">
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              className="flex w-full items-center justify-between gap-4 py-5 text-left font-serif text-xl font-semibold text-purple"
+              aria-expanded={open === i}
+            >
+              {f.q}
+              <span className={`text-2xl font-normal text-gold-deep transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}>+</span>
+            </button>
+            <AnimatePresence initial={false}>
+              {open === i && (
+                <motion.p
