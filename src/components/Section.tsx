@@ -23,3 +23,27 @@ export function Reveal({
   return (
     <motion.div
       className={className}
+      initial={start}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+  art,
+  dark = false,
+}: {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  art?: ArtName;
+  dark?: boolean;
+}) {
+  return (
