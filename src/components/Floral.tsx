@@ -187,3 +187,30 @@ function Floret({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
       <circle r={1.3} fill="#6f9445" />
     </g>
   );
+}
+
+const FLORETS: [number, number, number][] = [
+  [0, 0, 1], [-11, -6, 0.95], [10, -8, 1], [-4, -16, 0.9], [13, 6, 0.95], [-13, 7, 0.95], [1, 12, 1],
+  [-20, -2, 0.85], [20, -2, 0.85], [-8, 19, 0.85], [11, 18, 0.85], [6, -21, 0.85], [-15, -15, 0.8], [17, -14, 0.8],
+  [-20, 13, 0.8], [21, 12, 0.8],
+];
+
+export function Hydrangea({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <circle r={25} fill="#7fa65a" opacity={0.35} />
+      {FLORETS.map(([fx, fy, fs], i) => (
+        <Floret key={i} x={fx} y={fy} s={fs} />
+      ))}
+    </g>
+  );
+}
+
+export function BabysBreath({ x, y, s = 1, r = 0 }: { x: number; y: number; s?: number; r?: number }) {
+  const tips: [number, number][] = [[-14, -30], [-4, -36], [8, -32], [16, -24], [-20, -18], [4, -22], [20, -36], [-10, -42]];
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      {tips.map(([tx, ty], i) => (
+        <path key={`s${i}`} d={`M0 0Q${tx * 0.3} ${ty * 0.6} ${tx} ${ty}`} stroke="#8e9b6c" strokeWidth={0.7} fill="none" />
+      ))}
+      {tips.map(([tx, ty], i) => (
