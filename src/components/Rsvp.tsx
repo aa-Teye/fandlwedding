@@ -98,3 +98,28 @@ export function Rsvp({ guest }: { guest?: string | null }) {
                         +
                       </button>
                     </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <label className="block">
+                <span className="eyebrow mb-2 block">A message for the couple (optional)</span>
+                <textarea className={field} rows={3} value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Your wishes…" />
+              </label>
+
+              {error && <p className="font-serif text-lg text-rose">{error}</p>}
+
+              <button type="submit" className="btn btn-primary w-full !py-4">
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
+                  <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662a11.88 11.88 0 005.709 1.455h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0012.05 0z" />
+                </svg>
+                Send my reply on WhatsApp
+              </button>
+            </motion.form>
+          ) : (
+            <motion.div key="thanks" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="py-6 text-center">
+              <motion.svg viewBox="0 0 52 52" className="mx-auto h-16 w-16" aria-hidden="true">
+                <motion.circle cx={26} cy={26} r={24} fill="none" stroke="#c9a24b" strokeWidth={2} initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.8 }} />
+                <motion.path d="M15 27l7 7 15-16" fill="none" stroke="#4a1670" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.7 }} />
+              </motion.svg>
+              <p className="mt-4 font-script text-5xl text-purple">Thank you!</p>
