@@ -147,3 +147,27 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
 
         <motion.div className="mt-8 flex flex-wrap justify-center gap-3" {...fade(1.25)}>
           <a href="#invitation" className="btn btn-gold">Wedding details</a>
+          <a href="#rsvp" className="btn btn-outline-gold">RSVP</a>
+        </motion.div>
+      </motion.div>
+
+      <motion.a
+        href="#countdown"
+        aria-label="Scroll down"
+        className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-gold-soft/80"
+        initial={{ opacity: 0 }}
+        animate={show ? { opacity: 1 } : {}}
+        transition={{ delay: 1.8, duration: 1 }}
+      >
+        <span className="text-[0.6rem] uppercase tracking-[0.35em]">Scroll</span>
+        <span className="relative h-9 w-px overflow-hidden bg-gold/25">
+          <motion.span
+            className="absolute inset-x-0 top-0 h-3 bg-gold-soft"
+            animate={{ y: [-12, 36] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </span>
+      </motion.a>
+    </header>
+  );
+}
