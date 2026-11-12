@@ -53,3 +53,30 @@ export const photos: {
   couple: Photo | null;
   saveTheDate: Photo | null;
   invitation: Photo | null;
+} = {
+  // TODO: crop the couple from the save the date once the original file arrives.
+  couple: null,
+  saveTheDate: null, // TODO add public/save-the-date.jpg
+  invitation: null, // TODO add public/invitation.jpg
+};
+
+type Photo = { src: string; width: number; height: number; alt: string };
+
+// Put photos in public/gallery/ and list them here. The gallery appears once there is one.
+export const gallery: Photo[] = [];
+
+export const venues = [
+  {
+    label: "Ceremony",
+    name: "Overcomers Nation Church",
+    address: "Opposite Ayrton Drugs, Tesano, Accra",
+    time: "1:30 PM",
+    mapQuery: "Overcomers Nation Church, Tesano, Accra",
+    confirmed: true,
+  },
+];
+
+export const schedule = [
+  // TODO confirm with the couple
+  { time: "1:00 PM", title: "Guest Arrival", note: "Kindly be seated before the ceremony begins." },
+  { time: "1:30 PM", title: "Marriage Ceremony", note: "Overcomers Nation Church, Tesano. The service starts promptly." },
