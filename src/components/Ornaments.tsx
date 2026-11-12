@@ -76,3 +76,29 @@ export function Flourish({ className = "w-56", animate = true }: { className?: s
     "M60 20H10",
     "M180 20H230",
   ];
+  return (
+    <svg viewBox="0 0 240 32" className={className} aria-hidden="true" fill="none">
+      {paths.map((d, i) =>
+        animate ? (
+          <motion.path
+            key={i}
+            d={d}
+            stroke="url(#fl-gold-line)"
+            strokeWidth={i === 0 ? 1.4 : 1.1}
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 1.4, delay: 0.15 + i * 0.12, ease: "easeInOut" }}
+          />
+        ) : (
+          <path key={i} d={d} stroke="url(#fl-gold-line)" strokeWidth={i === 0 ? 1.4 : 1.1} strokeLinecap="round" />
+        ),
+      )}
+      <circle cx={50} cy={20} r={1.6} fill="#d9b45e" />
+      <circle cx={190} cy={20} r={1.6} fill="#d9b45e" />
+    </svg>
+  );
+}
+
+/** Two interlocked gold rings. */
