@@ -193,3 +193,30 @@ export function Ministers() {
   if (ministers.length === 0) return null;
   return (
     <Section id="ministers" eyebrow="With gratitude" title="Officiating Ministers" art="rings">
+      {ministers.map((g, i) => (
+        <Reveal key={g.church} delay={i * 0.1} className={`text-center ${i > 0 ? "mt-10" : ""}`}>
+          <p className="eyebrow mb-3">{g.church}</p>
+          <div className="space-y-1.5">
+            {g.names.map((m) => (
+              <p key={m} className="font-serif text-2xl font-semibold text-purple">{m}</p>
+            ))}
+          </div>
+        </Reveal>
+      ))}
+    </Section>
+  );
+}
+
+export function DressCode() {
+  return (
+    <Section id="dress-code" eyebrow="What to wear" title="Dress Code" subtitle={dressCode.title} art="attire" className="champagne">
+      <Reveal className="text-center">
+        <p className="mx-auto max-w-md font-serif text-xl text-muted">{dressCode.note}</p>
+      </Reveal>
+      <div className="mt-10 flex flex-wrap justify-center gap-6 sm:gap-10">
+        {dressCode.colours.map((c, i) => (
+          <motion.div
+            key={c.name}
+            className="flex flex-col items-center gap-3"
+            initial={{ opacity: 0, scale: 0.4, rotate: -30 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
