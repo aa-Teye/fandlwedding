@@ -54,3 +54,31 @@ body {
   /* Cream invitation paper */
   .paper {
     background-color: var(--color-cream);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(184, 146, 214, 0.16), transparent 42%),
+      radial-gradient(circle at 88% 92%, rgba(201, 162, 75, 0.14), transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .champagne {
+    background-color: var(--color-champagne);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.7), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Royal purple velvet with a satin sheen */
+  .velvet {
+    background-color: var(--color-plum);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      linear-gradient(118deg, transparent 22%, rgba(214, 160, 255, 0.10) 34%, transparent 46%, transparent 58%, rgba(214, 160, 255, 0.07) 68%, transparent 80%),
+      radial-gradient(120% 70% at 50% 0%, rgba(139, 63, 190, 0.55) 0%, transparent 60%),
+      radial-gradient(100% 60% at 50% 105%, rgba(12, 0, 22, 0.75) 0%, transparent 65%),
+      linear-gradient(180deg, #4a1670 0%, #3b1258 50%, #2a0a40 100%);
+  }
+
+  /* Text in gold foil that slowly catches the light */
+  .gold-foil {
+    background-image: linear-gradient(100deg, #a8792b 0%, #e9cd7f 16%, #fff4cc 27%, #d4aa4f 42%, #9c7428 55%, #e9cd7f 72%, #fff4cc 84%, #b8892f 100%);
+    background-size: 220% auto;
