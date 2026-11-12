@@ -23,3 +23,27 @@ export default function ProgrammePage() {
           <h1 className="mt-1 font-script text-6xl leading-tight text-purple sm:text-7xl">
             {couple.groom} <span className="font-serif text-4xl italic text-gold-deep">&amp;</span> {couple.bride}
           </h1>
+          <p className="mt-2 font-serif text-lg italic text-muted">
+            {wedding.displayDate} · {wedding.displayTime}
+          </p>
+          <Flourish className="mx-auto mt-5 w-52" animate={false} />
+          <h2 className="mt-6 font-display text-2xl tracking-[0.05em] text-purple">Order of Service</h2>
+        </header>
+
+        {orderOfService.length > 0 ? (
+          <div className="card mt-8 p-0">
+            <ProgrammeList items={orderOfService} />
+          </div>
+        ) : (
+          <div className="card mt-8 p-8 text-center">
+            <p className="font-display text-lg text-purple">Coming soon</p>
+            <p className="mt-2 font-serif text-lg text-muted">The order of service will appear here before the day.</p>
+          </div>
+        )}
+
+        {ministers.map((g) => (
+          <section key={g.church} className="mt-10 text-center">
+            <p className="eyebrow">{g.church}</p>
+            <div className="mt-2 space-y-1">
+              {g.names.map((m) => (
+                <p key={m} className="font-serif text-xl font-semibold text-purple">
