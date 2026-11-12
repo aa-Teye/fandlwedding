@@ -40,3 +40,24 @@ Turn the petals or sparkles off in `effects` in `src/content.ts`. Guests whose p
 | `/invite` | For the couple: type guest names, then send each personal link on WhatsApp; download printable QR codes |
 | `/programme` | The order of service on its own page, for guests in church (print its QR code from `/invite`) |
 
+## RSVP
+
+The "Confirm your attendance" form opens WhatsApp with the guest's reply already written, addressed to the first number in `rsvp.contacts`. The guest just presses send. Nothing to sign up for and no database to look after.
+
+## Photos
+
+Put the cards in `public/` and fill in `photos` in `src/content.ts`:
+
+- `couple`: the portrait at the top of the page (crop it from the save the date).
+- `saveTheDate` and `invitation`: shown with download buttons below the invitation.
+- **Gallery:** put photos in `public/gallery/` and list each one in `gallery`. The gallery and its menu link appear once there is at least one photo.
+
+## Optional extras in `src/content.ts`
+
+- **Livestream:** set `livestream.url` to a YouTube or Facebook Live link to show a "Watch the ceremony live" section.
+- **Music:** put a song at `public/music.mp3` and set `music.enabled` to `true`. It starts when a guest opens the gate, with a button to pause it.
+- **Wedding day:** nothing to set. On the day, the countdown changes to "Today's the day!" and the schedule highlights what's happening now.
+
+## Deploy
+
+Import the repository on [Vercel](https://vercel.com/new) and deploy. Add a custom domain under **Project → Settings → Domains**, then update `site.url` in `src/content.ts`.
