@@ -23,3 +23,28 @@ export function Rsvp({ guest }: { guest?: string | null }) {
     if (guest) setName((n) => n || guest);
   }, [guest]);
 
+  const to = rsvp.contacts[0];
+
+  const send = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return setError("Please tell us your name.");
+    if (!attending) return setError("Please let us know if you can come.");
+    setError("");
+    const lines = [
+      `RSVP: ${couple.groom} & ${couple.bride}'s wedding, ${wedding.shortDate}`,
+      "",
+      `Name: ${name.trim()}`,
+      attending === "yes" ? "Attending: Yes, joyfully! 🎉" : "Attending: Sorry, I can't make it",
+      ...(attending === "yes" ? [`Number of guests: ${guests}`] : []),
+      ...(message.trim() ? ["", `Message: ${message.trim()}`] : []),
+    ];
+    window.open(`https://wa.me/${intl(to.phone)}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank");
+    setSent(true);
+  };
+
+  return (
+    <Section
+      id="rsvp"
+      eyebrow="Kindly respond"
+      title="Confirm Your Attendance"
+      subtitle={rsvp.by || "We'd love to know if you can celebrate with us"}
