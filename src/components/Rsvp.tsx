@@ -73,3 +73,28 @@ export function Rsvp({ guest }: { guest?: string | null }) {
                       type="button"
                       onClick={() => setAttending(v)}
                       aria-pressed={attending === v}
+                      className={`rounded-xl border px-3 py-3 font-serif text-lg transition ${
+                        attending === v
+                          ? "border-purple bg-purple text-white shadow-[0_10px_20px_-12px_rgba(42,10,64,0.9)]"
+                          : "border-gold/40 bg-white/70 text-purple hover:border-purple"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+
+              <AnimatePresence initial={false}>
+                {attending === "yes" && (
+                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                    <span className="eyebrow mb-2 block">How many of you?</span>
+                    <div className="flex items-center gap-3">
+                      <button type="button" aria-label="Fewer guests" onClick={() => setGuests((g) => Math.max(1, g - 1))} className="h-11 w-11 rounded-full border border-gold/50 text-xl text-purple">
+                        −
+                      </button>
+                      <span className="w-10 text-center font-display text-2xl text-purple tabular-nums">{guests}</span>
+                      <button type="button" aria-label="More guests" onClick={() => setGuests((g) => Math.min(10, g + 1))} className="h-11 w-11 rounded-full border border-gold/50 text-xl text-purple">
+                        +
+                      </button>
+                    </div>
