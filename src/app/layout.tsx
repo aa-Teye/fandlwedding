@@ -16,3 +16,21 @@ const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700"], variable:
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || site.url),
+  // Private wedding site: keep it out of search engines.
+  robots: { index: false, follow: false },
+  title: `${couple.groom} & ${couple.bride} — ${wedding.displayDate}`,
+  description: `${invitation.line1}, ${couple.groomFull.first} ${couple.groomFull.last} & ${couple.brideFull.first} ${couple.brideFull.last} ${invitation.line2.replace(/ the marriage of$/, " their marriage")}. ${wedding.displayDate}, ${wedding.displayTime}, ${venues[0].name}, ${venues[0].address}.`,
+};
+
+export const viewport: Viewport = { themeColor: site.themeColor };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${pinyon.variable} ${cinzel.variable} ${cormorant.variable} ${lato.variable}`}>
+      <body>
+        <FloralDefs />
+        {children}
+      </body>
+    </html>
+  );
+}
