@@ -26,3 +26,30 @@ export const couple = {
 export const wedding = {
   date: "2026-12-19T13:30:00Z", // from the official invitation
   calendarEnd: "2026-12-19T17:00:00Z", // TODO end time
+  displayDate: "Saturday, 19th December 2026",
+  shortDate: "19 December 2026",
+  weekday: "Saturday",
+  month: "December",
+  day: "19",
+  daySuffix: "th",
+  year: "2026",
+  displayTime: "1:30pm",
+  timeNote: "Prompt",
+};
+
+export const invitation = {
+  // Wording from the official invitation card.
+  line1: "Together with their families",
+  families: "The families of",
+  line2: "joyfully invite you to celebrate the marriage of",
+  // From the save the date.
+  tagline: "Together in love and in purpose",
+  motto: "Two hearts… One journey",
+};
+
+export const scripture = { text: "Love is patient, love is kind.", ref: "1 Corinthians 13:4" };
+
+export const photos: {
+  couple: Photo | null;
+  saveTheDate: Photo | null;
+  invitation: Photo | null;
