@@ -70,3 +70,27 @@ export function Invitation() {
                 <Reveal key={c.label} delay={i * 0.1} className="w-[78%] shrink-0 snap-center sm:w-auto">
                   <Image
                     src={c.src}
+                    alt={c.alt}
+                    width={c.width}
+                    height={c.height}
+                    sizes="(max-width: 640px) 78vw, 320px"
+                    className="h-auto w-full rounded-lg shadow-[0_24px_50px_-24px_rgba(42,10,64,0.6)] ring-1 ring-gold/40"
+                  />
+                  <div className="mt-4 text-center">
+                    <p className="font-display text-lg tracking-[0.05em] text-purple">{c.label}</p>
+                    <a href={c.src} download={c.file} className="btn btn-outline mt-3 py-2">
+                      Download
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            {cards.length > 1 && (
+              <p className="mt-2 text-center text-[0.65rem] uppercase tracking-[0.2em] text-muted sm:hidden">Swipe to see both</p>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
