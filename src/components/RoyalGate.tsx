@@ -217,3 +217,30 @@ export function RoyalGate({
               <h1 className="mt-1 flex flex-col items-center leading-none">
                 <span className="gold-foil px-4 pb-1 font-script text-[3.3rem] leading-[1.15] sm:text-8xl">{couple.groom}</span>
                 <span className="gold-text -my-1 font-serif text-3xl italic sm:text-4xl">&amp;</span>
+                <span className="gold-foil px-4 pb-2 font-script text-[3.3rem] leading-[1.15] sm:text-8xl">{couple.bride}</span>
+              </h1>
+            </motion.div>
+
+            {/* bow and wax seal, tied on the ribbon */}
+            <div className="absolute left-1/2 top-[56%] z-10 h-0 w-0">
+              <Bow opening={opening} />
+              <motion.div
+                className="absolute left-0 top-0 h-[78px] w-[78px] -translate-x-1/2 -translate-y-1/2 sm:h-24 sm:w-24"
+                style={{ filter: "drop-shadow(0 6px 10px rgba(16,0,26,0.6))" }}
+                initial={false}
+                animate={
+                  opening
+                    ? { scale: [1, 1.22, 0], rotate: [0, -8, 30], opacity: [1, 1, 0] }
+                    : { scale: [1, 1.06, 1] }
+                }
+                transition={opening ? { duration: 0.5, times: [0, 0.4, 1] } : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Seal className="h-full w-full" />
+              </motion.div>
+              {/* flash of light where the seal breaks */}
+              <motion.div
+                className="pointer-events-none absolute left-0 top-0 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                style={{ background: "radial-gradient(circle, rgba(255,247,214,0.95) 0%, rgba(240,206,120,0.5) 35%, transparent 70%)" }}
+                initial={{ opacity: 0, scale: 0.2 }}
+                animate={opening ? { opacity: [0, 1, 0], scale: [0.2, 2.4, 3.2] } : { opacity: 0, scale: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.25 }}
