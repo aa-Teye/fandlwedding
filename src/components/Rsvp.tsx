@@ -123,3 +123,28 @@ export function Rsvp({ guest }: { guest?: string | null }) {
                 <motion.path d="M15 27l7 7 15-16" fill="none" stroke="#4a1670" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.7 }} />
               </motion.svg>
               <p className="mt-4 font-script text-5xl text-purple">Thank you!</p>
+              <p className="mx-auto mt-3 max-w-xs font-serif text-lg text-muted">
+                Your reply is ready in WhatsApp. Just press send. If it didn&rsquo;t open, you can call us below.
+              </p>
+              <button onClick={() => setSent(false)} className="mt-5 text-sm text-purple underline decoration-gold/60 underline-offset-4">
+                Change my reply
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Reveal>
+
+      <Reveal className="mt-8 text-center">
+        <p className="eyebrow">Or call / WhatsApp</p>
+        <div className="mt-3 flex flex-wrap justify-center gap-3">
+          {rsvp.contacts.map((c) => (
+            <a key={c.phone} href={`tel:+${intl(c.phone)}`} className="btn btn-outline">
+              {c.name ? `${c.name} · ` : ""}
+              {pretty(c.phone)}
+            </a>
+          ))}
+        </div>
+      </Reveal>
+    </Section>
+  );
+}
