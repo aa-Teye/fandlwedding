@@ -122,3 +122,28 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
               <p className="gold-text text-4xl font-semibold leading-tight">
                 {wedding.day}
                 <sup className="text-base">{wedding.daySuffix.toUpperCase()}</sup>
+              </p>
+              <p className="text-xs tracking-[0.2em]">
+                {wedding.month.toUpperCase()} {wedding.year}
+              </p>
+            </div>
+            <div className="mx-3 w-px bg-gradient-to-b from-transparent via-gold to-transparent" />
+            <div className="flex flex-1 flex-col justify-center">
+              <p className="gold-text text-3xl font-semibold leading-tight">{wedding.displayTime.toUpperCase()}</p>
+              <p className="text-[0.7rem] tracking-[0.3em] text-gold-soft">{wedding.timeNote.toUpperCase()}</p>
+            </div>
+          </div>
+          <div className="gold-rule" />
+        </motion.div>
+
+        <motion.div className="mt-5" {...fade(0.95)}>
+          <p className="font-display text-sm font-semibold tracking-[0.14em] text-gold-pale">{v.name.toUpperCase()}</p>
+          <p className="mt-1 text-[0.7rem] uppercase tracking-[0.22em] text-gold-soft/80">{v.address}</p>
+        </motion.div>
+
+        <motion.p className="gold-foil mt-6 px-4 pb-1 font-script text-4xl" {...fade(1.1)}>
+          {invitation.motto}
+        </motion.p>
+
+        <motion.div className="mt-8 flex flex-wrap justify-center gap-3" {...fade(1.25)}>
+          <a href="#invitation" className="btn btn-gold">Wedding details</a>
