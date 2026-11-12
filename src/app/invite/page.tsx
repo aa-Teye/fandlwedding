@@ -98,3 +98,28 @@ export default function InvitePage() {
                 >
                   Send on WhatsApp
                 </a>
+                <button onClick={() => copy(`${i}m`, r.text)} className="btn btn-outline py-2">
+                  {copied === `${i}m` ? "Copied" : "Copy message"}
+                </button>
+                <button onClick={() => copy(`${i}l`, r.link)} className="btn btn-outline py-2">
+                  {copied === `${i}l` ? "Copied" : "Copy link"}
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <section className="mt-16">
+          <p className="eyebrow text-center">Printable QR codes</p>
+          <p className="mx-auto mt-2 max-w-md text-balance text-center text-sm text-muted">
+            For church guests. Download these once the site is live on its real address, so the codes point there.
+          </p>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            <QrCard label="Wedding website" url={origin ? `${origin}/` : ""} />
+            <QrCard label="Order of Service" url={origin ? `${origin}/programme` : ""} />
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
