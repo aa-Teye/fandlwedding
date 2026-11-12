@@ -214,3 +214,30 @@ export function BabysBreath({ x, y, s = 1, r = 0 }: { x: number; y: number; s?: 
         <path key={`s${i}`} d={`M0 0Q${tx * 0.3} ${ty * 0.6} ${tx} ${ty}`} stroke="#8e9b6c" strokeWidth={0.7} fill="none" />
       ))}
       {tips.map(([tx, ty], i) => (
+        <g key={`f${i}`}>
+          <circle cx={tx} cy={ty} r={2.6} fill="#fffdf4" stroke="#d9d2bb" strokeWidth={0.4} />
+          <circle cx={tx + 3} cy={ty + 2} r={1.8} fill="#fffaf0" />
+          <circle cx={tx} cy={ty} r={0.8} fill="#e8d9a8" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+export function Lavender({ x, y, s = 1, r = 0 }: { x: number; y: number; s?: number; r?: number }) {
+  const buds = [0, 1, 2, 3, 4, 5, 6, 7];
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      <path d="M0 0L0-60" stroke="#6d7f4c" strokeWidth={1} />
+      {buds.map((i) => (
+        <g key={i}>
+          <ellipse cx={-2.5} cy={-22 - i * 5} rx={2.2} ry={3.4} transform={`rotate(-20 -2.5 ${-22 - i * 5})`} fill={i % 2 ? "#9b6bc6" : "#7a49a8"} />
+          <ellipse cx={2.5} cy={-24 - i * 5} rx={2.2} ry={3.4} transform={`rotate(20 2.5 ${-24 - i * 5})`} fill={i % 2 ? "#7a49a8" : "#b48ad8"} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+/** A lush corner arrangement, drawn for the top-left corner (mirror it for the others). */
+export function RoseCluster({ variant = 0 }: { variant?: 0 | 1 }) {
