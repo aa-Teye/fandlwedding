@@ -80,3 +80,30 @@ export const schedule = [
   // TODO confirm with the couple
   { time: "1:00 PM", title: "Guest Arrival", note: "Kindly be seated before the ceremony begins." },
   { time: "1:30 PM", title: "Marriage Ceremony", note: "Overcomers Nation Church, Tesano. The service starts promptly." },
+  { time: "After the service", title: "Photographs & Celebration", note: "Celebrate the newlyweds and join the photos." },
+];
+
+// TODO: from the official wedding programme. The section shows "coming soon" while this is empty.
+export const orderOfService: {
+  item: string;
+  by?: string[];
+  lyrics?: { stanza?: number; label?: string; lines: string[] }[];
+}[] = [];
+
+export const church = {
+  name: "Overcomers Nation Church",
+  short: "ONC",
+};
+
+// TODO: officiating ministers, grouped by church. Hidden while empty.
+export const ministers: { church: string; names: string[] }[] = [];
+
+export const dressCode = {
+  title: "Colours of the Day",
+  note: "Formal or traditional attire. Our colours are royal purple, tomato red and light green, if you'd like to match.", // TODO confirm wording
+  colours: [
+    { name: "Royal Purple", hex: "#5B2084" },
+    { name: "Tomato Red", hex: "#E0442E" },
+    { name: "Light Green", hex: "#B9DC8C" },
+  ],
+};
