@@ -295,3 +295,30 @@ export function Corner({
 }: {
   pos?: Pos;
   className?: string;
+  variant?: 0 | 1;
+  style?: CSSProperties;
+}) {
+  return (
+    <svg
+      viewBox="0 0 300 300"
+      aria-hidden="true"
+      className={`pointer-events-none absolute ${place[pos]} ${className}`}
+      style={{ filter: "drop-shadow(0 10px 14px rgba(20,2,32,0.35))", ...style }}
+    >
+      <g transform={mirror[pos]}>
+        <RoseCluster variant={variant} />
+      </g>
+    </svg>
+  );
+}
+
+export function Corners({ className = "w-36 sm:w-64", all = true }: { className?: string; all?: boolean }) {
+  return (
+    <>
+      <Corner pos="tl" className={className} />
+      <Corner pos="br" className={className} variant={1} />
+      {all && <Corner pos="tr" className={className} variant={1} />}
+      {all && <Corner pos="bl" className={className} />}
+    </>
+  );
+}
