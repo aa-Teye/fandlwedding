@@ -48,3 +48,28 @@ export function Rsvp({ guest }: { guest?: string | null }) {
       eyebrow="Kindly respond"
       title="Confirm Your Attendance"
       subtitle={rsvp.by || "We'd love to know if you can celebrate with us"}
+      art="envelope"
+    >
+      <Reveal from="zoom" className="card relative mx-auto max-w-lg overflow-hidden p-6 sm:p-9">
+        <AnimatePresence mode="wait" initial={false}>
+          {!sent ? (
+            <motion.form key="form" onSubmit={send} exit={{ opacity: 0, y: -10 }} className="space-y-5" noValidate>
+              <label className="block">
+                <span className="eyebrow mb-2 block">Your name</span>
+                <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Ama & Kofi Mensah" autoComplete="name" />
+              </label>
+
+              <fieldset>
+                <legend className="eyebrow mb-2 block">Will you attend?</legend>
+                <div className="grid grid-cols-2 gap-3">
+                  {(
+                    [
+                      ["yes", "Joyfully accept"],
+                      ["no", "Regretfully decline"],
+                    ] as const
+                  ).map(([v, label]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setAttending(v)}
+                      aria-pressed={attending === v}
