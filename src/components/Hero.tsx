@@ -23,3 +23,28 @@ function Medallion() {
       </p>
     </div>
   );
+}
+
+function Portrait() {
+  const p = photos.couple!;
+  return (
+    <div className="relative mx-auto w-[min(70vw,300px)]">
+      <div className="absolute -inset-2 border border-gold/80" style={{ borderRadius: arch }} />
+      <div className="absolute -inset-4 border border-gold/30" style={{ borderRadius: arch }} />
+      <Image
+        src={p.src}
+        alt={p.alt}
+        width={p.width}
+        height={p.height}
+        priority
+        sizes="(max-width: 640px) 70vw, 300px"
+        className="relative block h-auto w-full shadow-[0_30px_60px_-24px_rgba(0,0,0,0.8)]"
+        style={{ borderRadius: arch }}
+      />
+    </div>
+  );
+}
+
+export function Hero({ show, guest }: { show: boolean; guest?: string | null }) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
