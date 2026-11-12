@@ -138,3 +138,31 @@ body {
   50% { opacity: 1; transform: scale(1) rotate(45deg); }
 }
 
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+@keyframes rays {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.sparkle { animation: twinkle 3.2s ease-in-out infinite; }
+.drift { animation: drift 6s ease-in-out infinite; }
+.sway { animation: sway 7s ease-in-out infinite; transform-origin: top center; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gold-foil, .sparkle, .drift, .sway { animation: none; }
+  .sparkle { opacity: 0.6; transform: none; }
+}
