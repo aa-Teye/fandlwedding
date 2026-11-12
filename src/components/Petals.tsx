@@ -200,3 +200,28 @@ export function PetalBurst({ fire, onDone }: { fire: boolean; onDone?: () => voi
         p.vflip = rand(0.06, 0.16);
         return p;
       });
+      const dust = Array.from({ length: big ? 90 : 60 }, () => {
+        const a = rand(0, Math.PI * 2);
+        const v = rand(1.5, big ? 12 : 9);
+        const p = petal(cx, cy, rand(4, 12));
+        p.gold = true;
+        p.vx = Math.cos(a) * v;
+        p.vy = Math.sin(a) * v - rand(0, 3);
+        p.swayAmp = rand(2, 8);
+        p.decay = rand(0.006, 0.014);
+        p.alpha = 1;
+        return p;
+      });
+      return [...petals, ...dust];
+    },
+    (p, _i, { w, h }) => {
+      p.vx *= 0.975;
+      p.vy = p.vy * 0.975 + (p.gold ? 0.03 : 0.12);
+      if (!p.gold && p.vy > 1.6) p.vy = 1.6;
+      if (p.gold) p.life -= p.decay;
+      return p.life > 0 && p.y < h + 50 && p.x > -80 && p.x < w + 80;
+    },
+    { running: fire, onDone },
+  );
+  return <canvas ref={ref} aria-hidden="true" className="pointer-events-none fixed inset-0 z-[55] h-full w-full" />;
+}
