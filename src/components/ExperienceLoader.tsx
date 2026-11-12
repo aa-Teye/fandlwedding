@@ -46,3 +46,27 @@ export function ExperienceLoader({ onLoaded }: { onLoaded: () => void }) {
       {!done && (
         <motion.div
           key="loader"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="velvet fixed inset-0 z-[60] flex select-none flex-col items-center justify-center px-6 text-center"
+        >
+          <div className="relative flex h-32 w-32 items-center justify-center">
+            <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true">
+              <circle cx={60} cy={60} r={56} fill="none" stroke="rgba(201,162,75,0.2)" strokeWidth={1.5} />
+              <motion.circle
+                cx={60}
+                cy={60}
+                r={56}
+                fill="none"
+                stroke="url(#fl-gold-line)"
+                strokeWidth={2}
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: progress / 100 }}
+                transition={{ ease: "easeInOut", duration: 0.3 }}
+              />
+            </svg>
+            <motion.p
+              className="flex items-baseline"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
