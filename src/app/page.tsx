@@ -25,3 +25,29 @@ export default function Home() {
   // Links straight to a section (e.g. /#programme or /#rsvp) skip the gate.
   useEffect(() => {
     const id = window.location.hash.slice(1);
+    if (!id) return;
+    setSkipIntro(true);
+    setOpened(true);
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+  }, []);
+
+  // Personal invite links look like /?to=Ama%20%26%20Kofi
+  useEffect(() => {
+    const to = new URLSearchParams(window.location.search).get("to")?.trim();
+    if (to) setGuest(to.slice(0, 60));
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = opened ? "" : "hidden";
+  }, [opened]);
+
+  return (
+    <MotionConfig reducedMotion="user">
+      {!skipIntro && !experienceReady && <ExperienceLoader onLoaded={() => setExperienceReady(true)} />}
+      {!skipIntro && (
+        <RoyalGate
+          guest={guest}
+          onStart={() => {
+            if (music.enabled) audioRef.current?.play().catch(() => {});
+          }}
+          onOpen={() => setOpened(true)}
