@@ -134,3 +134,30 @@ export const faqs = [
     q: "Where is the church?",
     a: "Overcomers Nation Church, opposite Ayrton Drugs, Tesano, Accra. Tap \"Open in Maps\" in the venue section for directions.",
   },
+  {
+    q: "What should I wear?",
+    a: "Formal or traditional attire. Our colours of the day are royal purple, tomato red and light green.",
+  },
+  {
+    q: "Who can I contact for inquiries?",
+    a: "Please call or WhatsApp 024 653 1897 or 054 602 4584.",
+  },
+];
+
+export const note = {
+  body: "We are so grateful to God for bringing us together, and for each of you who has loved, prayed for and walked with us. We can't wait to celebrate this day with you.", // TODO from the couple
+  signoff: "With love, Francis & Linda",
+};
+
+// Paste a YouTube or Facebook Live link here to show the "Watch live" section.
+export const livestream = { url: "", platform: "YouTube" }; // TODO
+
+// Put a song at public/music.mp3 and set enabled: true. It starts when a guest opens the gate.
+export const music = { enabled: false, src: "/music.mp3" }; // TODO
+
+// The heavy effects. Each can be switched off here. All of them stay off for guests whose
+// phone asks for reduced motion.
+export const effects = {
+  petals: true, // rose petals drifting down the page
+  sparkles: true, // twinkling gold dust in the purple sections
+};
