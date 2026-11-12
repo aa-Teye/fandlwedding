@@ -133,3 +133,30 @@ export function Rose({ x, y, s = 1, r = 0, tone = "red" }: RoseProps) {
 }
 
 export function Bud({ x, y, s = 1, r = 0, tone = "red" }: RoseProps) {
+  const g = tone === "red" ? "url(#fl-red-2)" : "url(#fl-pur-2)";
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      <path d="M0 22C-3 30-2 40 0 48" stroke="#4f7a3a" strokeWidth={2} fill="none" />
+      <path d="M-11 4C-13-8-6-18 0-22C6-18 13-8 11 4C8 14-8 14-11 4Z" fill={g} stroke="#3a020a" strokeOpacity={0.4} strokeWidth={0.8} />
+      <path d="M-4-14C-1-8 1-2 0 8" stroke="#fff" strokeOpacity={0.25} strokeWidth={1.2} fill="none" />
+      <path d="M-12 6C-8 18 8 18 12 6C9 22-9 22-12 6Z" fill="url(#fl-leaf)" />
+      <path d="M0 18C-10 14-16 18-18 24C-10 26-4 23 0 18Z" fill="url(#fl-leaf)" />
+    </g>
+  );
+}
+
+export function Leaf({ x, y, s = 1, r = 0, gold = false }: { x: number; y: number; s?: number; r?: number; gold?: boolean }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`}>
+      {gold ? (
+        <>
+          <path d="M0 0C8-8 26-10 40 0C26 10 8 8 0 0Z" fill="url(#fl-gold)" />
+          <path d="M2 0H36" stroke="#8a6420" strokeOpacity={0.6} strokeWidth={0.8} />
+        </>
+      ) : (
+        <>
+          <path d="M0 0C10-11 34-14 54 0C34 14 10 11 0 0Z" fill="url(#fl-leaf)" />
+          <path d="M2 0C18-1 34-1 50 0" stroke="#a9cf86" strokeOpacity={0.55} strokeWidth={1} fill="none" />
+        </>
+      )}
+    </g>
