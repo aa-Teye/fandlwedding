@@ -304,3 +304,30 @@ export function Faq() {
             <AnimatePresence initial={false}>
               {open === i && (
                 <motion.p
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden pb-5 font-serif text-lg text-muted"
+                >
+                  {f.a}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export function Note() {
+  return (
+    <section id="note" className="velvet relative scroll-mt-14 overflow-hidden px-6 py-24 text-center sm:py-28">
+      {effects.sparkles && <Sparkles count={16} seed={41} />}
+      <Corner pos="tl" className="w-28 opacity-90 sm:w-44" />
+      <Corner pos="br" className="w-28 opacity-90 sm:w-44" variant={1} />
+      <div className="relative z-10 mx-auto max-w-2xl">
+        <Illustration name="quill" dark className="mx-auto mb-4 h-16 w-16" />
+        <Reveal>
+          <p className="eyebrow !text-gold-soft">From our hearts</p>
+          <h2 className="gold-foil mx-auto mt-1 w-fit px-4 pb-2 font-script text-5xl sm:text-6xl">A note from us</h2>
