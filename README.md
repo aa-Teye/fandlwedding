@@ -40,9 +40,20 @@ Turn the petals or sparkles off in `effects` in `src/content.ts`. Guests whose p
 | `/invite` | For the couple: type guest names, then send each personal link on WhatsApp; download printable QR codes |
 | `/programme` | The order of service on its own page, for guests in church (print its QR code from `/invite`) |
 
-## RSVP
+## RSVP and the guest list
 
-The "Confirm your attendance" form opens WhatsApp with the guest's reply already written, addressed to the first number in `rsvp.contacts`. The guest just presses send. Nothing to sign up for and no database to look after.
+The "Confirm your attendance" form saves each reply to a Neon Postgres database through `/api/rsvp`. After sending, guests can also tell the couple on WhatsApp.
+
+The couple see every reply, with totals, at `/guests?key=YOUR_KEY`.
+
+Set these environment variables (in `.env.local` on your computer, and under **Settings → Environment Variables** on Vercel):
+
+| Variable | What it is |
+|---|---|
+| `DATABASE_URL` | The Neon connection string (the pooled one) |
+| `GUESTS_KEY` | A secret of your choice that opens the guest list page |
+
+Run `npm run db:migrate` once to create the table (it is safe to run again).
 
 ## Photos
 
