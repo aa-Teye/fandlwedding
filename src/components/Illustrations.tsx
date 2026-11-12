@@ -49,3 +49,28 @@ const art = {
   quill: [
     "M14 44h16v12H14zM17 44v-4h10v4",
     "M24 40c6-14 18-28 32-34-4 12-14 24-26 30",
+    "M24 40L50 10M34 30l6 1M39 24l6 1M44 18l5 1",
+  ],
+  question: [
+    "M10 14h44q4 0 4 4v22q0 4-4 4H28l-10 10V44h-4q-4 0-4-4V18q0-4 4-4z",
+    "M27 24c0-6 10-6 10 0 0 4-5 5-5 9",
+    "M32 38.5v.1",
+  ],
+  camera: [
+    "M10 14h44v36H10z",
+    "M14 18h36v28H14z",
+    "M14 42l12-12 8 8 6-6 10 10M37 25a3 3 0 106 0 3 3 0 10-6 0",
+  ],
+  heart: [
+    "M32 52S10 39 10 24c0-8 6-12 12-12 5 0 8 3 10 6 2-3 5-6 10-6 6 0 12 4 12 12 0 15-22 28-22 28z",
+    "M32 44S18 35 18 25c0-4 3-6 6-6",
+  ],
+} as const;
+
+export type ArtName = keyof typeof art;
+
+export function Illustration({
+  name,
+  className = "h-16 w-16",
+  dark = false,
+}: {
