@@ -79,3 +79,30 @@ export function FloralDefs() {
         <radialGradient id="fl-seal" cx="0.38" cy="0.32" r="0.8">
           <stop offset="0" stopColor="#fff3c8" />
           <stop offset="0.35" stopColor="#e6c36f" />
+          <stop offset="0.75" stopColor="#b58a33" />
+          <stop offset="1" stopColor="#7d5a1b" />
+        </radialGradient>
+        <linearGradient id="fl-gold-line" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#a8792b" />
+          <stop offset="0.5" stopColor="#f7e2a6" />
+          <stop offset="1" stopColor="#c9a24b" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+const PETAL_OUT = "M-29 0C-47-22-35-50 0-51C35-50 47-22 29 0Z";
+const PETAL_EDGE = "M-27-26C-20-44 20-44 27-26";
+const SPIRAL =
+  "M3-3C8-2 7 6 0 6C-7 6-9-3-3-8C3-12 12-9 13-1M-13 1C-14-12 1-17 9-14M-10 9C-3 14 9 12 14 5";
+
+type RoseProps = { x: number; y: number; s?: number; r?: number; tone?: "red" | "purple" };
+
+export function Rose({ x, y, s = 1, r = 0, tone = "red" }: RoseProps) {
+  const red = tone === "red";
+  const g1 = red ? "url(#fl-red-1)" : "url(#fl-pur-1)";
+  const g2 = red ? "url(#fl-red-2)" : "url(#fl-pur-2)";
+  const core = red ? "url(#fl-red-core)" : "url(#fl-pur-core)";
+  const line = red ? "#3a020a" : "#14031f";
+  const light = red ? "#ff8f8a" : "#cfa6f2";
