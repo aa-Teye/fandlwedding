@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { couple } from "@/content";
 import { db, type RsvpRow } from "@/lib/db";
+import { GUESTS_KEY } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Guest list", robots: { index: false, follow: false } };
@@ -8,8 +9,7 @@ export const metadata: Metadata = { title: "Guest list", robots: { index: false,
 // For the couple: /guests?key=YOUR_KEY  (the key is GUESTS_KEY in the environment variables)
 export default async function GuestsPage({ searchParams }: { searchParams: Promise<{ key?: string }> }) {
   const { key } = await searchParams;
-  const expected = process.env.GUESTS_KEY;
-  if (!expected || key !== expected) {
+  if (key !== GUESTS_KEY) {
     return (
       <main className="velvet flex min-h-screen items-center justify-center px-6 text-center">
         <div>
