@@ -1,10 +1,9 @@
 import { neon } from "@neondatabase/serverless";
+import { DATABASE_URL } from "./config";
 
 // Neon's HTTP driver: one fast request per query, which suits Vercel's serverless functions.
 export function db() {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set");
-  return neon(url);
+  return neon(DATABASE_URL);
 }
 
 export type RsvpRow = {
