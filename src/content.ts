@@ -54,10 +54,15 @@ export const photos: {
   saveTheDate: Photo | null;
   invitation: Photo | null;
 } = {
-  // TODO: crop the couple from the save the date once the original file arrives.
-  couple: null,
-  saveTheDate: null, // TODO add public/save-the-date.jpg
-  invitation: null, // TODO add public/invitation.jpg
+  // Cropped from the save the date, with the gold text on the right removed.
+  couple: { src: "/couple.jpg", width: 400, height: 576, alt: "Francis and Linda" },
+  saveTheDate: {
+    src: "/save-the-date.jpg",
+    width: 853,
+    height: 1280,
+    alt: "Save the date: Francis Kormla Balame & Linda Kutorkor Neequaye, 19 December 2026, Overcomers Nation Church, Tesano",
+  },
+  invitation: null, // TODO add public/invitation.jpg (the cream floral card)
 };
 
 type Photo = { src: string; width: number; height: number; alt: string };
