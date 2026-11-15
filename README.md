@@ -71,4 +71,8 @@ Put the cards in `public/` and fill in `photos` in `src/content.ts`:
 
 ## Deploy
 
-Import the repository on [Vercel](https://vercel.com/new) and deploy. Add a custom domain under **Project → Settings → Domains**, then update `site.url` in `src/content.ts`.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the GitHub import settings, required
+environment variables, database setup, and verification steps. Secrets must be
+configured explicitly; the app does not include fallback credentials.
+
+Import the repository on [Vercel](https://vercel.com/new), configure the environment variables described above, and deploy. Add a custom domain under **Project → Settings → Domains**, then set `NEXT_PUBLIC_SITE_URL` to that address and redeploy.

@@ -147,7 +147,7 @@ export function Rsvp({ guest }: { guest?: string | null }) {
               </a>
               <br />
               <button onClick={() => setSent(false)} className="mt-5 text-sm text-purple underline decoration-gold/60 underline-offset-4">
-                Change my reply
+                Send another reply
               </button>
             </motion.div>
           )}

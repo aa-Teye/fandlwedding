@@ -1,14 +1,9 @@
 // Creates the database tables. Run with: npm run db:migrate
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { neon } from "@neondatabase/serverless";
 
 for (const file of [".env.local", ".env"]) {
-  try {
-    for (const line of readFileSync(file, "utf8").split("\n")) {
-      const m = line.match(/^([A-Z_]+)="?(.*?)"?$/);
-      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
-    }
-  } catch {}
+  if (existsSync(file)) process.loadEnvFile(file);
 }
 if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not set (put it in .env.local)");
 const sql = neon(process.env.DATABASE_URL);
