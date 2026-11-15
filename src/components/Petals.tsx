@@ -164,17 +164,24 @@ function petal(x: number, y: number, size: number): Particle {
   };
 }
 
+/** A drifting petal: fewer and more see-through than the burst, so text underneath stays readable. */
+function drifter(x: number, y: number, size: number): Particle {
+  const p = petal(x, y, size);
+  p.alpha = rand(0.4, 0.6);
+  return p;
+}
+
 /** Rose petals drifting down the whole page. Sparser once guests scroll past the top. */
 export function PetalField({ active = true }: { active?: boolean }) {
   const ref = useCanvas(
     ({ w, h }) => {
-      const n = w < 640 ? 16 : 28;
-      return Array.from({ length: n }, () => petal(rand(0, w), rand(-h, h), rand(w < 640 ? 12 : 14, w < 640 ? 20 : 26)));
+      const n = w < 640 ? 8 : 14;
+      return Array.from({ length: n }, () => drifter(rand(0, w), rand(-h, h), rand(w < 640 ? 11 : 14, w < 640 ? 18 : 24)));
     },
     (p, _i, { w, h }) => {
       if (p.y > h + 40 || p.x < -80 || p.x > w + 80) {
         const sparse = window.scrollY > window.innerHeight * 0.9;
-        Object.assign(p, petal(rand(0, w), -40 - (sparse ? rand(0, h * 1.6) : rand(0, 120)), p.size));
+        Object.assign(p, drifter(rand(0, w), -40 - (sparse ? rand(0, h * 1.6) : rand(0, 120)), p.size));
       }
       return true;
     },
