@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { couple, gallery, ministers } from "@/content";
+import { couple, gallery, gifts, ministers } from "@/content";
 import { Corner } from "./Floral";
 
 const links: [string, string][] = [
@@ -12,7 +12,7 @@ const links: [string, string][] = [
   ["programme", "Order of Service"],
   ...(ministers.length > 0 ? ([["ministers", "Ministers"]] as [string, string][]) : []),
   ["dress-code", "Dress Code"],
-  ["gifts", "Gifts"],
+  ...(gifts.accounts.length > 0 ? ([["gifts", "Gifts"]] as [string, string][]) : []),
   ["rsvp", "RSVP"],
   ["faq", "Questions"],
 ];

@@ -263,25 +263,20 @@ function CopyRow({ label, value }: { label: string; value: string }) {
 }
 
 export function Gifts() {
+  // Hidden until the Mobile Money / bank details are added in content.ts.
+  if (gifts.accounts.length === 0) return null;
   return (
     <Section id="gifts" eyebrow="Blessings" title="Gifts" subtitle={gifts.intro} art="gift">
-      {gifts.accounts.length > 0 ? (
-        <div className={`grid gap-6 ${gifts.accounts.length > 1 ? "sm:grid-cols-2" : "mx-auto max-w-md"}`}>
-          {gifts.accounts.map((g, i) => (
-            <Reveal key={g.method} delay={i * 0.1} className="card p-6">
-              <p className="eyebrow mb-2">{g.method}</p>
-              {g.rows.map((r) => (
-                <CopyRow key={r.label} {...r} />
-              ))}
-            </Reveal>
-          ))}
-        </div>
-      ) : (
-        <Reveal className="card mx-auto max-w-md p-8 text-center">
-          <p className="font-display text-lg text-purple">Details coming soon</p>
-          <p className="mt-2 font-serif text-lg text-muted">Mobile Money and bank details will be shared here.</p>
-        </Reveal>
-      )}
+      <div className={`grid gap-6 ${gifts.accounts.length > 1 ? "sm:grid-cols-2" : "mx-auto max-w-md"}`}>
+        {gifts.accounts.map((g, i) => (
+          <Reveal key={g.method} delay={i * 0.1} className="card p-6">
+            <p className="eyebrow mb-2">{g.method}</p>
+            {g.rows.map((r) => (
+              <CopyRow key={r.label} {...r} />
+            ))}
+          </Reveal>
+        ))}
+      </div>
     </Section>
   );
 }
