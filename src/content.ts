@@ -54,8 +54,8 @@ export const photos: {
   saveTheDate: Photo | null;
   invitation: Photo | null;
 } = {
-  // Cropped from the save the date, with the gold text on the right removed.
-  couple: { src: "/couple.jpg", width: 400, height: 576, alt: "Francis and Linda" },
+  // From the couple's own pre-wedding studio shoot (same photo as gallery-1.jpg).
+  couple: { src: "/couple.jpg", width: 771, height: 1080, alt: "Francis and Linda" },
   saveTheDate: {
     src: "/save-the-date.jpg",
     width: 853,
