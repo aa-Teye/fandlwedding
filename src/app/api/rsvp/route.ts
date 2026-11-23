@@ -13,6 +13,9 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
   const name = clean(body.name, 80);
   const message = clean(body.message, 600);
   const invitedAs = clean(body.invitedAs, 80);

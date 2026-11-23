@@ -132,7 +132,7 @@ export const gifts: {
   accounts: { method: string; rows: { label: string; value: string }[] }[];
 } = {
   intro: "Your presence is the greatest gift. Should you wish to bless us further, here are a few ways.",
-  accounts: [], // TODO Mobile Money / bank details
+  accounts: [], // TODO Mobile Money / bank details (the Gifts section is hidden while empty)
 };
 
 // RSVP: replies from the form go to the first number on WhatsApp.

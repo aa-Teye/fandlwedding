@@ -67,17 +67,17 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
     <header
       id="top"
       ref={ref}
-      className="velvet relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-24 pt-20 text-center"
+      className="velvet relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-24 pt-36 text-center sm:pt-44 lg:pt-20"
     >
       <GoldFrame dark className="inset-3 sm:inset-6" />
       {effects.sparkles && <Sparkles count={30} seed={11} />}
 
       <motion.div className="pointer-events-none absolute inset-0" style={{ y: floatUp }}>
         <motion.div className="absolute left-0 top-0 origin-top-left" {...bloom(0.2)}>
-          <Corner pos="tl" className="!relative w-44 sm:w-80" />
+          <Corner pos="tl" className="!relative w-36 sm:w-60 lg:w-80" />
         </motion.div>
         <motion.div className="absolute right-0 top-0 origin-top-right" {...bloom(0.35)}>
-          <Corner pos="tr" className="!relative w-28 sm:w-52" variant={1} />
+          <Corner pos="tr" className="!relative w-28 sm:w-44 lg:w-52" variant={1} />
         </motion.div>
       </motion.div>
       <motion.div className="pointer-events-none absolute inset-0" style={{ y: sink }}>
@@ -107,10 +107,10 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
         </motion.div>
 
         <motion.h1 className="mt-8 flex flex-col items-center" {...fade(0.6)}>
-          <span className="gold-foil px-3 pb-1 font-script text-[3.2rem] leading-[1.1] sm:text-7xl">{couple.groomFull.first}</span>
+          <span className="gold-foil px-3 pb-1 font-script text-[clamp(2.2rem,12.5vw,3.2rem)] leading-[1.1] sm:text-7xl">{couple.groomFull.first}</span>
           <span className="gold-text font-display text-2xl font-semibold tracking-[0.2em] sm:text-3xl">{couple.groomFull.last.toUpperCase()}</span>
           <span className="gold-text my-1 font-serif text-4xl italic">&amp;</span>
-          <span className="gold-foil px-3 pb-1 font-script text-[3.2rem] leading-[1.1] sm:text-7xl">{couple.brideFull.first}</span>
+          <span className="gold-foil px-3 pb-1 font-script text-[clamp(2.2rem,12.5vw,3.2rem)] leading-[1.1] sm:text-7xl">{couple.brideFull.first}</span>
           <span className="gold-text font-display text-2xl font-semibold tracking-[0.2em] sm:text-3xl">{couple.brideFull.last.toUpperCase()}</span>
         </motion.h1>
 

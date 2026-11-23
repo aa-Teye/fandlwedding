@@ -125,7 +125,9 @@ export function Countdown() {
           )}
         </Reveal>
         <p className="mt-8 font-display text-xs tracking-[0.25em] text-gold-soft/90">
-          {wedding.displayDate.toUpperCase()} · {wedding.displayTime.toUpperCase()}
+          <span className="whitespace-nowrap">{wedding.displayDate.toUpperCase()}</span>
+          <span className="hidden sm:inline"> · </span>
+          <span className="mt-1 block sm:mt-0 sm:inline">{wedding.displayTime.toUpperCase()}</span>
         </p>
       </div>
     </section>
