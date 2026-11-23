@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   venues, wedding, couple, schedule, orderOfService, ministers, dressCode, church,
-  gifts, faqs, note, scripture, effects,
+  gifts, faqs, note, scripture, effects, vendors,
 } from "@/content";
 import { Section, Reveal } from "./Section";
 import { downloadIcs, googleCalendarUrl } from "@/lib/calendar";
@@ -259,6 +259,22 @@ function CopyRow({ label, value }: { label: string; value: string }) {
         {copied ? "Copied" : "Copy"}
       </button>
     </div>
+  );
+}
+
+export function Vendors() {
+  if (vendors.length === 0) return null;
+  return (
+    <Section id="vendors" eyebrow="With thanks" title="The Wedding Team" art="laurel" className="champagne">
+      <div className="mx-auto grid max-w-xl gap-4 sm:grid-cols-2">
+        {vendors.map((v, i) => (
+          <Reveal key={v.role} delay={i * 0.08} className="card flex items-center justify-between gap-4 px-6 py-4 text-left">
+            <span className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-gold-deep">{v.role}</span>
+            <span className="font-serif text-lg font-semibold text-purple">{v.name}</span>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
   );
 }
 
