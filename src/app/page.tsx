@@ -5,7 +5,7 @@ import { ExperienceLoader } from "@/components/ExperienceLoader";
 import { RoyalGate } from "@/components/RoyalGate";
 import { Hero } from "@/components/Hero";
 import { Countdown } from "@/components/Countdown";
-import { Venue, Schedule, Programme, Ministers, DressCode, Gifts, Faq, Note, Footer } from "@/components/Details";
+import { Venue, Schedule, Programme, Ministers, DressCode, Vendors, Gifts, Faq, Note, Footer } from "@/components/Details";
 import { Invitation } from "@/components/Invitation";
 import { Gallery } from "@/components/Gallery";
 import { Nav } from "@/components/Nav";
@@ -68,6 +68,7 @@ export default function Home() {
         <Programme />
         <Ministers />
         <DressCode />
+        <Vendors />
         <Gifts />
         <Rsvp guest={guest} />
         <Faq />
