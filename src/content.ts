@@ -68,7 +68,21 @@ export const photos: {
 type Photo = { src: string; width: number; height: number; alt: string };
 
 // Put photos in public/gallery/ and list them here. The gallery appears once there is one.
-export const gallery: Photo[] = [];
+export const gallery: Photo[] = [
+  { src: "/gallery/gallery-1.jpg", width: 771, height: 1080, alt: "Francis & Linda in smock, pre-wedding shoot" },
+  { src: "/gallery/gallery-2.jpg", width: 771, height: 1080, alt: "Francis & Linda, pre-wedding shoot" },
+  { src: "/gallery/gallery-3.jpg", width: 771, height: 1080, alt: "Francis & Linda, pre-wedding shoot" },
+  { src: "/gallery/gallery-4.jpg", width: 1080, height: 771, alt: "Francis & Linda in traditional wear, pre-wedding shoot" },
+];
+
+// The couple's vendors, credited on the site.
+export const vendors = [
+  { role: "Decor", name: "MasterMind Events" },
+  { role: "Style A Bride", name: "Regal by Atitirew" },
+  { role: "Bridal Accessories", name: "Bjays Bridals" },
+  { role: "Groom & Bridal Wardrobe", name: "MiAbi Bridals" },
+  { role: "Makeup", name: "Dottys Salon" },
+];
 
 export const venues = [
   {
