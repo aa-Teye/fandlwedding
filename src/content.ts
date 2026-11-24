@@ -171,7 +171,7 @@ export const note = {
 export const livestream = { url: "", platform: "YouTube" }; // TODO
 
 // Put a song at public/music.mp3 and set enabled: true. It starts when a guest opens the gate.
-export const music = { enabled: false, src: "/music.mp3" }; // TODO
+export const music = { enabled: true, src: "/music.mp3" };
 
 // The heavy effects. Each can be switched off here. All of them stay off for guests whose
 // phone asks for reduced motion.
