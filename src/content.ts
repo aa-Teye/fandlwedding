@@ -139,7 +139,6 @@ export const gifts: {
 export const rsvp = {
   by: "", // TODO e.g. "Kindly respond by 5th December 2026"
   contacts: [
-    { name: "", phone: "0246531897" }, // TODO name
     { name: "", phone: "0546024584" }, // TODO name; printed as 546024584 on the card
   ],
 };
@@ -159,7 +158,7 @@ export const faqs = [
   },
   {
     q: "Who can I contact for inquiries?",
-    a: "Please call or WhatsApp 024 653 1897 or 054 602 4584.",
+    a: "Please call or WhatsApp 054 602 4584.",
   },
 ];
 
