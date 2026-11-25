@@ -77,6 +77,7 @@ export const gallery: Photo[] = [
   { src: "/gallery/gallery-6.jpg", width: 771, height: 1080, alt: "Francis & Linda in red, standing together" },
   { src: "/gallery/gallery-7.jpg", width: 771, height: 1080, alt: "Francis & Linda in red, face to face" },
   { src: "/gallery/gallery-8.jpg", width: 719, height: 1080, alt: "Francis & Linda walking hand in hand" },
+  { src: "/gallery/gallery-9.jpg", width: 771, height: 1080, alt: "Francis & Linda in traditional wear, portrait" },
 ];
 
 // The couple's vendors, credited on the site.
