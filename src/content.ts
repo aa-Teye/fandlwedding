@@ -54,12 +54,12 @@ export const photos: {
   saveTheDate: Photo | null;
   invitation: Photo | null;
 } = {
-  // From the couple's own pre-wedding studio shoot (same photo as gallery-1.jpg).
-  couple: { src: "/couple.jpg", width: 771, height: 1080, alt: "Francis and Linda" },
+  // Cropped from the final save the date.
+  couple: { src: "/couple.jpg", width: 829, height: 867, alt: "Francis and Linda" },
   saveTheDate: {
     src: "/save-the-date.jpg",
-    width: 853,
-    height: 1280,
+    width: 1024,
+    height: 1536,
     alt: "Save the date: Francis Kormla Balame & Linda Kutorkor Neequaye, 19 December 2026, Overcomers Nation Church, Tesano",
   },
   invitation: null, // TODO add public/invitation.jpg (the cream floral card)
