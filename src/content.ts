@@ -74,6 +74,7 @@ export const gallery: Photo[] = [
   { src: "/gallery/gallery-3.jpg", width: 771, height: 1080, alt: "Francis & Linda, pre-wedding shoot" },
   { src: "/gallery/gallery-4.jpg", width: 1080, height: 771, alt: "Francis & Linda in traditional wear, pre-wedding shoot" },
   { src: "/gallery/gallery-5.jpg", width: 1080, height: 771, alt: "Francis & Linda in traditional wear, cheek to cheek" },
+  { src: "/gallery/gallery-6.jpg", width: 771, height: 1080, alt: "Francis & Linda in red, standing together" },
 ];
 
 // The couple's vendors, credited on the site.
