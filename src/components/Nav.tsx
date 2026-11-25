@@ -12,7 +12,7 @@ const links: [string, string][] = [
   ["programme", "Order of Service"],
   ...(ministers.length > 0 ? ([["ministers", "Ministers"]] as [string, string][]) : []),
   ["dress-code", "Dress Code"],
-  ...(vendors.length > 0 ? ([["vendors", "The Team"]] as [string, string][]) : []),
+  ...(vendors.length > 0 ? ([["vendors", "Service Providers"]] as [string, string][]) : []),
   ...(gifts.accounts.length > 0 ? ([["gifts", "Gifts"]] as [string, string][]) : []),
   ["rsvp", "RSVP"],
   ["faq", "Questions"],

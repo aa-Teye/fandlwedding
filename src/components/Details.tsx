@@ -265,7 +265,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
 export function Vendors() {
   if (vendors.length === 0) return null;
   return (
-    <Section id="vendors" eyebrow="With thanks" title="The Wedding Team" art="laurel" className="champagne">
+    <Section id="vendors" eyebrow="With thanks" title="Service Providers" art="laurel" className="champagne">
       <div className="mx-auto grid max-w-xl gap-4 sm:grid-cols-2">
         {vendors.map((v, i) => (
           <Reveal key={v.role} delay={i * 0.08} className="card flex items-center justify-between gap-4 px-6 py-4 text-left">
