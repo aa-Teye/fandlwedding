@@ -254,11 +254,11 @@ export function RoyalGate({
               transition={opening ? { duration: 0.3 } : { delay: 0.8, duration: 1 }}
             >
               <motion.p
-                className="inline-block rounded-full border border-gold/40 bg-purple-night/45 px-6 py-1.5 font-serif text-xl italic text-gold-pale backdrop-blur-[2px]"
+                className="mx-auto inline-block max-w-[85vw] rounded-full border border-gold/40 bg-purple-night/45 px-6 py-2 font-serif text-base italic leading-snug text-gold-pale backdrop-blur-[2px] sm:max-w-sm sm:text-xl"
                 animate={opening ? {} : { opacity: [0.55, 1, 0.55] }}
                 transition={{ duration: 2.6, repeat: Infinity }}
               >
-                Tap to open
+                If you are ready, click this to enter our forever journey
               </motion.p>
               <p className="mt-2 font-display text-[0.7rem] tracking-[0.4em] text-gold-soft/90">
                 {wedding.day} · {String(new Date(wedding.date).getUTCMonth() + 1).padStart(2, "0")} · {wedding.year}
