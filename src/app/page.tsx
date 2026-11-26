@@ -13,6 +13,7 @@ import { Livestream } from "@/components/Livestream";
 import { MusicToggle } from "@/components/Music";
 import { PetalField } from "@/components/Petals";
 import { Rsvp } from "@/components/Rsvp";
+import { FlipPages } from "@/components/FlipPages";
 import { effects, music } from "@/content";
 
 export default function Home() {
@@ -57,6 +58,7 @@ export default function Home() {
       {music.enabled && opened && <MusicToggle audio={audioRef} />}
       {effects.petals && opened && <PetalField />}
       {opened && <Nav />}
+      {opened && <FlipPages />}
       <main>
         <Hero show={opened} guest={guest} />
         <Countdown />
