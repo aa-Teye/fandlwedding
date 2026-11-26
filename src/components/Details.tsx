@@ -246,7 +246,7 @@ function CopyRow({ label, value }: { label: string; value: string }) {
     <div className="flex items-center justify-between gap-3 border-b border-gold/20 py-3 last:border-0">
       <div>
         <p className="text-[0.62rem] uppercase tracking-[0.2em] text-muted">{label}</p>
-        <p className="font-serif text-xl font-semibold text-purple">{value}</p>
+        <p className="font-serif text-xl font-semibold text-purple [font-variant-numeric:lining-nums_tabular-nums]">{value}</p>
       </div>
       <button
         onClick={() => {
