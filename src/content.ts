@@ -137,7 +137,24 @@ export const gifts: {
   accounts: { method: string; rows: { label: string; value: string }[] }[];
 } = {
   intro: "Your presence is the greatest gift. Should you wish to bless us further, here are a few ways.",
-  accounts: [], // TODO Mobile Money / bank details (the Gifts section is hidden while empty)
+  accounts: [
+    {
+      method: "Mobile Money",
+      rows: [
+        { label: "Name", value: "Linda Kutorkor Neequaye" },
+        { label: "MTN MoMo", value: "0249888322" },
+        { label: "Telecel Cash", value: "0204752124" },
+      ],
+    },
+    {
+      method: "Bank Transfer",
+      rows: [
+        { label: "Account name", value: "Linda Kutorkor Neequaye" },
+        { label: "Account number", value: "0159338673018" },
+        { label: "Bank", value: "Republic Bank – Koforidua Branch" },
+      ],
+    },
+  ],
 };
 
 // RSVP: replies from the form go to the first number on WhatsApp.
