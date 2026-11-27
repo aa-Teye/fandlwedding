@@ -1,8 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { couple } from "@/content";
-import { GoldFrame } from "./Ornaments";
 
 // Guests can scroll as normal, or flip through the site like the pages of a book: swipe left/right,
 // tap the arrows, or press the left/right arrow keys. Every flip lands on a clean page: each section
@@ -111,52 +109,104 @@ function currentIndex(list: HTMLElement[]) {
 
 const jumpTo = (y: number) => window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
 
-function Sheet({ dir, phase, onDone }: { dir: Dir; phase: "in" | "out"; onDone: () => void }) {
-  // Next: the sheet swings in from the right, then turns away to the left. Previous mirrors it.
-  const fromRight = dir === 1;
-  const origin = phase === "in" ? (fromRight ? "right center" : "left center") : fromRight ? "left center" : "right center";
-  const start = phase === "in" ? (fromRight ? 92 : -92) : 0;
-  const end = phase === "in" ? 0 : fromRight ? -92 : 92;
-  return (
-    <motion.div
-      key={phase}
-      className="absolute inset-0 overflow-hidden"
-      style={{
-        transformOrigin: origin,
-        backfaceVisibility: "hidden",
-        willChange: "transform",
-        // A light gradient (no noise texture) so the turning page repaints smoothly on any phone.
-        background:
-          "radial-gradient(120% 70% at 50% 0%, rgba(139,63,190,0.55) 0%, transparent 60%), linear-gradient(180deg, #4a1670 0%, #3b1258 50%, #2a0a40 100%)",
-        boxShadow: fromRight ? "-24px 0 40px rgba(0,0,0,0.45)" : "24px 0 40px rgba(0,0,0,0.45)",
-      }}
-      initial={{ rotateY: start }}
-      animate={{ rotateY: end }}
-      transition={{ duration: phase === "in" ? 0.38 : 0.46, ease: phase === "in" ? [0.2, 0.7, 0.3, 1] : [0.6, 0, 0.8, 0.4] }}
-      onAnimationComplete={onDone}
-    >
-      <GoldFrame dark className="inset-4 sm:inset-6" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <p className="flex items-baseline">
-          <span className="gold-foil px-1 font-script text-7xl">{couple.groom[0]}</span>
-          <span className="gold-text font-serif text-3xl italic">&amp;</span>
-          <span className="gold-foil px-1 font-script text-7xl">{couple.bride[0]}</span>
-        </p>
-      </div>
-      {/* the page darkens a little as it turns */}
-      <motion.div
-        className="absolute inset-0 bg-black"
-        initial={{ opacity: phase === "in" ? 0.45 : 0 }}
-        animate={{ opacity: phase === "in" ? 0 : 0.45 }}
-        transition={{ duration: phase === "in" ? 0.38 : 0.46 }}
-      />
-    </motion.div>
-  );
+/** A still copy of the site as it looks with the page scrolled to y: the paper the turning page is made of. */
+function snapshot(y: number) {
+  const vh = window.innerHeight;
+  const page = document.createElement("div");
+  page.setAttribute("aria-hidden", "true");
+  Object.assign(page.style, {
+    position: "absolute",
+    inset: "0",
+    overflow: "hidden",
+    background: getComputedStyle(document.body).backgroundColor,
+    transformOrigin: "left center",
+    backfaceVisibility: "hidden",
+    willChange: "transform",
+    boxShadow: "0 0 40px rgba(20,4,30,0.35)",
+  });
+  const sheet = document.createElement("div");
+  Object.assign(sheet.style, { position: "absolute", left: "0", right: "0", top: `${-y}px` });
+  for (const el of sections()) {
+    const top = layoutTop(el);
+    if (top + el.offsetHeight < y || top > y + vh) continue;
+    const copy = el.cloneNode(true) as HTMLElement;
+    copy.removeAttribute("id");
+    copy.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"));
+    copy.querySelectorAll("img").forEach((img) => {
+      img.loading = "eager";
+      img.decoding = "sync";
+    });
+    // a map would reload inside the copy, so the copy shows its frame instead
+    copy.querySelectorAll("iframe").forEach((f) => {
+      const blank = document.createElement("div");
+      blank.className = f.className;
+      blank.style.background = "#efe6d6";
+      f.replaceWith(blank);
+    });
+    Object.assign(copy.style, { position: "absolute", left: "0", right: "0", top: `${top}px`, margin: "0" });
+    sheet.appendChild(copy);
+  }
+  page.appendChild(sheet);
+  // the paper darkens as it bends away from the light
+  const shade = document.createElement("div");
+  Object.assign(shade.style, {
+    position: "absolute",
+    inset: "0",
+    opacity: "0",
+    background: "linear-gradient(90deg, rgba(26,6,40,0.05) 0%, rgba(26,6,40,0.35) 55%, rgba(26,6,40,0.75) 100%)",
+  });
+  page.appendChild(shade);
+  return { page, shade };
+}
+
+const frame = () => new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
+
+/**
+ * Turns the page like a real book. Next: the page being read lifts from its right edge and turns
+ * over to the left, revealing the next page underneath. Back: the previous page turns back over
+ * from the left and lands on top.
+ */
+async function turnPage(dir: Dir, target: number) {
+  const stage = document.createElement("div");
+  stage.setAttribute("aria-hidden", "true");
+  Object.assign(stage.style, { position: "fixed", inset: "0", zIndex: "38", perspective: "1800px", pointerEvents: "auto" });
+  // the shadow the turning page casts on the page beneath it
+  const shadow = document.createElement("div");
+  Object.assign(shadow.style, {
+    position: "absolute",
+    inset: "0",
+    opacity: "0",
+    background: "linear-gradient(90deg, rgba(20,4,30,0.55) 0%, rgba(20,4,30,0.25) 45%, rgba(20,4,30,0) 100%)",
+  });
+  const { page, shade } = snapshot(dir === 1 ? window.scrollY : target);
+  stage.append(shadow, page);
+  const flat = "rotateY(0deg)";
+  const turned = "rotateY(-94deg)";
+  const timing: KeyframeAnimationOptions = { duration: 820, easing: "cubic-bezier(0.45, 0.05, 0.4, 1)", fill: "forwards" };
+  if (dir === -1) page.style.transform = turned;
+  document.body.appendChild(stage);
+  await frame();
+  if (dir === 1) {
+    jumpTo(target); // the next page is now underneath
+    await Promise.all([
+      page.animate([{ transform: flat }, { transform: turned }], timing).finished,
+      shade.animate([{ opacity: 0 }, { opacity: 1 }], timing).finished,
+      shadow.animate([{ opacity: 1 }, { opacity: 0 }], timing).finished,
+    ]);
+  } else {
+    await Promise.all([
+      page.animate([{ transform: turned }, { transform: flat }], timing).finished,
+      shade.animate([{ opacity: 1 }, { opacity: 0 }], timing).finished,
+      shadow.animate([{ opacity: 0 }, { opacity: 1 }], timing).finished,
+    ]);
+    jumpTo(target); // the page has landed: the site is now where the copy shows
+    await frame();
+  }
+  stage.remove();
 }
 
 export function FlipPages() {
   const reduce = useReducedMotion();
-  const [flip, setFlip] = useState<{ dir: Dir; phase: "in" | "out"; target: number } | null>(null);
   const [pos, setPos] = useState({ i: 0, n: 0, top: true, bottom: false });
   const [hint, setHint] = useState(true);
   const busy = useRef(false);
@@ -174,21 +224,12 @@ export function FlipPages() {
         return;
       }
       busy.current = true;
-      setFlip({ dir, phase: "in", target: stop.y });
+      turnPage(dir, stop.y).finally(() => {
+        busy.current = false;
+      });
     },
     [reduce],
   );
-
-  const onSheetDone = () => {
-    if (!flip) return;
-    if (flip.phase === "in") {
-      jumpTo(flip.target);
-      setFlip({ ...flip, phase: "out" });
-    } else {
-      setFlip(null);
-      busy.current = false;
-    }
-  };
 
   // Page counter and the ends of the book follow normal scrolling too.
   useEffect(() => {
@@ -255,19 +296,6 @@ export function FlipPages() {
 
   return (
     <>
-      <AnimatePresence>
-        {flip && (
-          <motion.div
-            className="pointer-events-auto fixed inset-0 z-[45]"
-            style={{ perspective: "1600px" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.1 }}
-          >
-            <Sheet dir={flip.dir} phase={flip.phase} onDone={onSheetDone} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <div data-noflip className="fixed bottom-5 left-1/2 z-[25] flex -translate-x-1/2 flex-col items-center">
         <AnimatePresence>
           {hint && (
