@@ -50,7 +50,6 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const floatUp = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const sink = useTransform(scrollYProgress, [0, 1], [0, 110]);
-  const fadeOut = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const fade = (d: number) => ({
     initial: { opacity: 0, y: 26 },
     animate: show ? { opacity: 1, y: 0 } : {},
@@ -89,7 +88,7 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
         </motion.div>
       </motion.div>
 
-      <motion.div className="relative z-10 flex w-full max-w-xl flex-col items-center" style={{ opacity: fadeOut }}>
+      <div className="relative z-10 flex w-full max-w-xl flex-col items-center">
         {guest && (
           <motion.p className="gold-foil mb-3 px-4 font-script text-4xl sm:text-5xl" {...fade(0.1)}>
             Dear <Amp text={guest} className="font-serif text-[0.8em] italic" />,
@@ -149,7 +148,7 @@ export function Hero({ show, guest }: { show: boolean; guest?: string | null }) 
           <a href="#invitation" className="btn btn-gold">Wedding details</a>
           <a href="#rsvp" className="btn btn-outline-gold">RSVP</a>
         </motion.div>
-      </motion.div>
+      </div>
 
       <motion.a
         href="#countdown"
