@@ -94,7 +94,7 @@ export function Illustration({
         initial={{ scale: 0.4, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
       />
       {art[name].map((d, i) => (
         <motion.path
@@ -107,7 +107,7 @@ export function Illustration({
           initial={{ pathLength: 0, opacity: 0 }}
           whileInView={{ pathLength: 1, opacity: 1 }}
           viewport={{ once: true, margin: "-30px" }}
-          transition={{ duration: 1.6, delay: 0.2 + i * 0.35, ease: "easeInOut" }}
+          transition={{ duration: 0.85, delay: 0.1 + i * 0.12, ease: "easeInOut" }}
         />
       ))}
     </svg>

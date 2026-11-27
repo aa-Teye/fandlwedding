@@ -89,7 +89,7 @@ export function Flourish({ className = "w-56", animate = true }: { className?: s
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 1 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 1.4, delay: 0.15 + i * 0.12, ease: "easeInOut" }}
+            transition={{ duration: 0.8, delay: 0.08 + i * 0.06, ease: "easeInOut" }}
           />
         ) : (
           <path key={i} d={d} stroke="url(#fl-gold-line)" strokeWidth={i === 0 ? 1.4 : 1.1} strokeLinecap="round" />
