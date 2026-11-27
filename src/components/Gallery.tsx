@@ -32,7 +32,15 @@ export function Gallery() {
     <Section id="gallery" eyebrow="Moments" title="Gallery" art="camera" className="champagne">
       <div className="columns-2 gap-3 sm:columns-3">
         {gallery.map((p, i) => (
-          <button key={p.src} onClick={() => setOpen(i)} className="mb-3 block w-full overflow-hidden rounded-xl ring-1 ring-gold/40">
+          <motion.button
+            key={p.src}
+            onClick={() => setOpen(i)}
+            className="mb-3 block w-full overflow-hidden rounded-xl ring-1 ring-gold/40"
+            initial={{ opacity: 0, y: 24, scale: 0.92 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ type: "spring", stiffness: 160, damping: 16, delay: (i % 3) * 0.07, opacity: { duration: 0.5, delay: (i % 3) * 0.07 } }}
+          >
             <Image
               src={p.src}
               alt={p.alt}
@@ -41,7 +49,7 @@ export function Gallery() {
               sizes="(max-width: 640px) 50vw, 300px"
               className="h-auto w-full transition duration-500 hover:scale-105"
             />
-          </button>
+          </motion.button>
         ))}
       </div>
       <AnimatePresence>
