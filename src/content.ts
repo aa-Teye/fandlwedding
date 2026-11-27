@@ -167,7 +167,8 @@ export const gifts: {
 export const rsvp = {
   by: "", // TODO e.g. "Kindly respond by 5th December 2026"
   contacts: [
-    { name: "", phone: "0546024584" }, // TODO name; printed as 546024584 on the card
+    { name: "Bright", phone: "0546024584" },
+    { name: "Esther", phone: "0246531897" },
   ],
 };
 
