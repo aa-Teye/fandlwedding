@@ -187,7 +187,7 @@ export const faqs = [
   },
   {
     q: "Who can I contact for inquiries?",
-    a: "Please call or WhatsApp 054 602 4584.",
+    a: "Please call or WhatsApp Bright on 054 602 4584 or Esther on 024 653 1897.",
   },
 ];
 
