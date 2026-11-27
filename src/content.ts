@@ -62,7 +62,13 @@ export const photos: {
     height: 1536,
     alt: "Save the date: Francis Kormla Balame & Linda Kutorkor Neequaye, 19 December 2026, Overcomers Nation Church, Tesano",
   },
-  invitation: null, // TODO add public/invitation.jpg (the cream floral card)
+  // The couple's actual invitation artwork.
+  invitation: {
+    src: "/invitation.jpg",
+    width: 1024,
+    height: 1536,
+    alt: "Invitation: together with their families, the families of Balame and Neequaye joyfully invite you to celebrate the marriage of Francis Kormla Balame and Linda Kutorkor Neequaye on Saturday 19th December 2026 at 1:30 PM prompt, Overcomers Nation Church, Tesano",
+  },
 };
 
 type Photo = { src: string; width: number; height: number; alt: string };
