@@ -14,19 +14,27 @@ export function Reveal({
   className?: string;
   from?: "up" | "left" | "right" | "zoom";
 }) {
+  // Content pops gently into place: it fades in while a soft spring settles it with a slight bounce.
   const start = {
-    up: { opacity: 0, y: 34 },
-    left: { opacity: 0, x: -40 },
-    right: { opacity: 0, x: 40 },
-    zoom: { opacity: 0, scale: 0.9 },
+    up: { opacity: 0, y: 30, scale: 0.96 },
+    left: { opacity: 0, x: -36, scale: 0.97 },
+    right: { opacity: 0, x: 36, scale: 0.97 },
+    zoom: { opacity: 0, scale: 0.86 },
   }[from];
   return (
     <motion.div
       className={className}
       initial={start}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{
+        type: "spring",
+        stiffness: 150,
+        damping: 17,
+        mass: 0.9,
+        delay,
+        opacity: { duration: 0.55, ease: "easeOut", delay },
+      }}
     >
       {children}
     </motion.div>
